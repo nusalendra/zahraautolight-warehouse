@@ -45,7 +45,15 @@ use App\Http\Controllers\form_layouts\HorizontalForm;
 use App\Http\Controllers\tables\Basic as TablesBasic;
 
 // Main Page Route
-Route::get('/', [Analytics::class, 'index'])->name('dashboard-analytics');
+Route::middleware('guest')->group(function () {
+    Route::get('/', [LoginBasic::class, 'index'])->name('login');
+    Route::post('/login', [LoginBasic::class, 'login'])->name('login-store');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', [Analytics::class, 'index'])->name('dashboard-analytics');
+    Route::post('/logout', [LoginBasic::class, 'logout']);
+});
 
 // layout
 Route::get('/layouts/without-menu', [WithoutMenu::class, 'index'])->name('layouts-without-menu');
@@ -60,11 +68,6 @@ Route::get('/pages/account-settings-notifications', [AccountSettingsNotification
 Route::get('/pages/account-settings-connections', [AccountSettingsConnections::class, 'index'])->name('pages-account-settings-connections');
 Route::get('/pages/misc-error', [MiscError::class, 'index'])->name('pages-misc-error');
 Route::get('/pages/misc-under-maintenance', [MiscUnderMaintenance::class, 'index'])->name('pages-misc-under-maintenance');
-
-// authentication
-Route::get('/auth/login-basic', [LoginBasic::class, 'index'])->name('auth-login-basic');
-Route::get('/auth/register-basic', [RegisterBasic::class, 'index'])->name('auth-register-basic');
-Route::get('/auth/forgot-password-basic', [ForgotPasswordBasic::class, 'index'])->name('auth-reset-password-basic');
 
 // cards
 Route::get('/cards/basic', [CardBasic::class, 'index'])->name('cards-basic');
