@@ -8,11 +8,11 @@ $navbarDetached = ($navbarDetached ?? '');
 <!-- Navbar -->
 @if(isset($navbarDetached) && $navbarDetached == 'navbar-detached')
 <nav class="layout-navbar {{$containerNav}} navbar navbar-expand-xl {{$navbarDetached}} align-items-center bg-navbar-theme" id="layout-navbar">
-@endif
-@if(isset($navbarDetached) && $navbarDetached == '')
-<nav class="layout-navbar navbar navbar-expand-xl align-items-center bg-navbar-theme" id="layout-navbar">
-  <div class="{{$containerNav}}">
-    @endif
+  @endif
+  @if(isset($navbarDetached) && $navbarDetached == '')
+  <nav class="layout-navbar navbar navbar-expand-xl align-items-center bg-navbar-theme" id="layout-navbar">
+    <div class="{{$containerNav}}">
+      @endif
 
       <!--  Brand demo (display only for navbar-full and hide on below xl) -->
       @if(isset($navbarFull))
@@ -97,9 +97,12 @@ $navbarDetached = ($navbarDetached ?? '');
                 <div class="dropdown-divider my-1"></div>
               </li>
               <li>
-                <a class="dropdown-item" href="javascript:void(0);">
-                  <i class="bx bx-power-off bx-md me-3"></i><span>Log Out</span>
-                </a>
+                <form action="/logout" method="POST">
+                  @csrf
+                  <button type="submit" class="dropdown-item">
+                    <i class="bx bx-power-off bx-md me-3 mb-1"></i><span>Log Out</span>
+                  </button>
+                </form>
               </li>
             </ul>
           </li>

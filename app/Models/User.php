@@ -20,6 +20,7 @@ class User extends Authenticatable
     'name',
     'email',
     'password',
+    'role_id'
   ];
 
   /**
@@ -43,5 +44,19 @@ class User extends Authenticatable
       'email_verified_at' => 'datetime',
       'password' => 'hashed',
     ];
+  }
+
+  public function redirectPath()
+  {
+    return match ($this->role->name) {
+      'Admin' => '/dashboard',
+      'Karyawan' => '/barang-masuk',
+      default => '/',
+    };
+  }
+
+  public function role()
+  {
+    return $this->belongsTo(Role::class, 'role_id');
   }
 }
