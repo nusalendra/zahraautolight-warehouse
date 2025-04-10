@@ -1,0 +1,16 @@
+{
+    "menu": [
+        {
+            "name": "Monitoring Barang",
+            "icon": "menu-icon tf-icons bx bxs-package",
+            "slug": "monitoring-barang",
+            "submenu": [
+                {
+                    "url": "monitoring-barang/barang-masuk",
+                    "name": "Proses Barang Masuk",
+                    "slug": "monitoring-barang.barang-masuk"
+                }
+            ]
+        }
+    ]
+}
