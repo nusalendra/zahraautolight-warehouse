@@ -50,7 +50,7 @@ class User extends Authenticatable
   {
     return match ($this->role->name) {
       'Admin' => '/dashboard',
-      'Karyawan' => '/barang-masuk',
+      'Karyawan' => '/monitoring-barang/barang-masuk',
       default => '/',
     };
   }
