@@ -42,6 +42,7 @@ use App\Http\Controllers\form_elements\BasicInput;
 use App\Http\Controllers\form_elements\InputGroups;
 use App\Http\Controllers\form_layouts\VerticalForm;
 use App\Http\Controllers\form_layouts\HorizontalForm;
+use App\Http\Controllers\manajemen_barang\ListBarang;
 use App\Http\Controllers\tables\Basic as TablesBasic;
 
 // Main Page Route
@@ -53,6 +54,9 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [Analytics::class, 'index'])->name('dashboard-analytics');
     Route::post('/logout', [LoginBasic::class, 'logout']);
+    Route::prefix('manajemen-barang')->name('manajemen-barang.')->group(function () {
+        Route::get('/list', [ListBarang::class, 'index'])->name('list');
+    });
 });
 
 // layout
