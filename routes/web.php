@@ -43,7 +43,8 @@ use App\Http\Controllers\form_elements\InputGroups;
 use App\Http\Controllers\form_layouts\VerticalForm;
 use App\Http\Controllers\form_layouts\HorizontalForm;
 use App\Http\Controllers\manajemen_barang\ListBarang;
-use App\Http\Controllers\monitoring_barang\BarangMasuk;
+use App\Http\Controllers\monitoring_produk\Merek;
+use App\Http\Controllers\monitoring_produk\ProdukMasuk;
 use App\Http\Controllers\tables\Basic as TablesBasic;
 
 // Main Page Route
@@ -62,8 +63,9 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::middleware('role:Karyawan')->group(function () {
-        Route::prefix('monitoring-barang')->name('monitoring-barang.')->group(function () {
-            Route::get('/barang-masuk', [BarangMasuk::class, 'index'])->name('barang-masuk');
+        Route::prefix('monitoring-produk')->name('monitoring-produk.')->group(function () {
+            Route::get('/proses-produk-masuk', [ProdukMasuk::class, 'index'])->name('proses-produk-masuk');
+            Route::get('/merek', [Merek::class, 'index'])->name('merek');
         });
         Route::get('/layouts/without-navbar', [WithoutNavbar::class, 'index'])->name('layouts-without-navbar');
     });

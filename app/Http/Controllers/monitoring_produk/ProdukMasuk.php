@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\monitoring_barang;
+namespace App\Http\Controllers\monitoring_produk;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class BarangMasuk extends Controller
+class ProdukMasuk extends Controller
 {
     public function index()
     {

@@ -1,14 +1,19 @@
 {
     "menu": [
         {
-            "name": "Monitoring Barang",
+            "name": "Monitoring Produk",
             "icon": "menu-icon tf-icons bx bxs-package",
-            "slug": "monitoring-barang",
+            "slug": "monitoring-produk",
             "submenu": [
                 {
-                    "url": "monitoring-barang/barang-masuk",
-                    "name": "Proses Barang Masuk",
-                    "slug": "monitoring-barang.barang-masuk"
+                    "url": "monitoring-produk/merek",
+                    "name": "Merek",
+                    "slug": "monitoring-produk.merek"
+                },
+                {
+                    "url": "monitoring-produk/proses-produk-masuk",
+                    "name": "Proses Produk Masuk",
+                    "slug": "monitoring-produk.proses-produk-masuk"
                 }
             ]
         }
