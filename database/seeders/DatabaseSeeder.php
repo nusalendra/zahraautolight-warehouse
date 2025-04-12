@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Merek;
+use App\Models\Produk;
 use App\Models\Role;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -34,6 +36,19 @@ class DatabaseSeeder extends Seeder
       'username' => 'laskarpelangi',
       'password' => bcrypt('password'),
       'role_id' => '2'
+    ]);
+
+    Merek::create([
+      'nama' => 'ABC1',
+    ]);
+
+    Produk::create([
+      'merek_id' => 1,
+      'nama' => 'test'
+    ]);
+
+    Merek::create([
+      'nama' => 'tessss'
     ]);
   }
 }
