@@ -20,6 +20,6 @@ class Merek extends Controller
     {
         $data = $this->service->fetchAll();
 
-        return view('content.monitoring-barang.merek-barang.index', compact('data'));
+        return view('content.monitoring-produk.merek-produk.index', compact('data'));
     }
 }

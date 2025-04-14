@@ -39,16 +39,15 @@ class DatabaseSeeder extends Seeder
     ]);
 
     Merek::create([
-      'nama' => 'ABC1',
-    ]);
-
-    Produk::create([
-      'merek_id' => 1,
-      'nama' => 'test'
+      'nama' => 'PRO7',
     ]);
 
     Merek::create([
-      'nama' => 'tessss'
+      'nama' => 'UPS',
+    ]);
+
+    Merek::create([
+      'nama' => 'BEEBOOT',
     ]);
   }
 }

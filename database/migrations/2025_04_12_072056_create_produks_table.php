@@ -15,6 +15,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('merek_id')->constrained();
             $table->string('nama');
+            $table->integer('jumlah');
+            $table->integer('harga_satuan');
+            $table->integer('total');
             $table->timestamps();
         });
     }
