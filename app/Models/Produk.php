@@ -9,7 +9,10 @@ class Produk extends Model
     protected $table = "produks";
     protected $fillable = [
         'merek_id',
-        'nama'
+        'nama',
+        'jumlah',
+        'harga_satuan',
+        'total'
     ];
 
     public function merek()
