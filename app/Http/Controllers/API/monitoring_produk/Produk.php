@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API\monitoring_produk;
 
+use App\Dtos\AddStockProductDto;
 use App\Dtos\ProductDto;
 use App\Http\Controllers\Controller;
 use App\Http\Services\ProdukService;
@@ -16,6 +17,27 @@ class Produk extends Controller
         $this->produkService = $produkService;
     }
 
+    public function getProductByMerek($merekId)
+    {
+        try {
+            if (!$merekId) {
+                throw new \Exception('MerekId not found');
+            }
+
+            $result = $this->produkService->fetchByMerekId($merekId);
+
+            return [
+                'status' => 'success',
+                'data' => $result
+            ];
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $th->getMessage(),
+            ], 400);
+        }
+    }
+
     public function store(Request $request)
     {
         try {
@@ -25,6 +47,21 @@ class Produk extends Controller
             if ($result['status'] == 'error') {
                 throw new \Exception($result['message']);
             }
+
+            return $result;
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $th->getMessage(),
+            ], 400);
+        }
+    }
+
+    public function addStock(Request $request)
+    {
+        try {
+            $productDto = AddStockProductDto::fromRequest($request);
+            $result = $this->produkService->addStockProduct($productDto->products);
 
             return $result;
         } catch (\Throwable $th) {

@@ -16,6 +16,11 @@
                     "slug": "monitoring-produk.proses-produk-masuk"
                 },
                 {
+                    "url": "monitoring-produk/tambah-stok-produk",
+                    "name": "Tambah Stok Produk",
+                    "slug": "monitoring-produk.tambah-stok-produk"
+                },
+                {
                     "url": "monitoring-produk/produk-keluar",
                     "name": "Produk Keluar",
                     "slug": "monitoring-produk.produk-keluar"
