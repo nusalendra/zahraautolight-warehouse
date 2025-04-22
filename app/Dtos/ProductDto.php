@@ -30,7 +30,7 @@ class ProductDto
                 $dto->products[] = [
                     'merek_id' => $dto->merek_id,
                     'nama' => $namaProduk,
-                    'jumlah' => (int) $jumlah[$index],
+                    'stok' => (int) $jumlah[$index],
                     'harga_satuan' => (int) $harga[$index],
                     'total' => (int) $jumlah[$index] * (int) $harga[$index],
                     'created_at' => now(),

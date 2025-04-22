@@ -19,4 +19,9 @@ class Produk extends Model
     {
         return $this->belongsTo(Merek::class, 'merek_id');
     }
+
+    public function logStokProduk()
+    {
+        return $this->hasMany(LogStokProduk::class, 'produk_id');
+    }
 }

@@ -46,6 +46,7 @@ use App\Http\Controllers\manajemen_barang\ListBarang;
 use App\Http\Controllers\monitoring_produk\Merek;
 use App\Http\Controllers\monitoring_produk\ProdukKeluar;
 use App\Http\Controllers\monitoring_produk\ProdukMasuk;
+use App\Http\Controllers\monitoring_produk\TambahStokProduk;
 use App\Http\Controllers\tables\Basic as TablesBasic;
 
 // Main Page Route
@@ -67,6 +68,7 @@ Route::middleware('auth')->group(function () {
         Route::prefix('monitoring-produk')->name('monitoring-produk.')->group(function () {
             Route::get('/merek', [Merek::class, 'index'])->name('merek');
             Route::get('/proses-produk-masuk', [ProdukMasuk::class, 'index'])->name('proses-produk-masuk');
+            Route::get('/tambah-stok-produk', [TambahStokProduk::class, 'index'])->name('tambah-stok-produk');
             Route::get('/produk-keluar', [ProdukKeluar::class, 'index'])->name('produk-keluar');
         });
         Route::get('/layouts/without-navbar', [WithoutNavbar::class, 'index'])->name('layouts-without-navbar');
