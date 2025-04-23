@@ -82,11 +82,6 @@
                         </div>
 
                         <div class="row justify-content-end mt-4">
-                            <div class="col-xxl-3 col-12 mb-2">
-                                <button type="reset" class="btn btn-outline-secondary w-100">
-                                    <i class="bx bx-reset me-1"></i> Reset
-                                </button>
-                            </div>
                             <div class="col-xxl-4 col-12">
                                 <button type="submit" class="btn btn-primary w-100">
                                     <i class="bx bx-save me-1"></i> Simpan Stok
