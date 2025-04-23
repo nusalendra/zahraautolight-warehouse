@@ -1,6 +1,21 @@
 @extends('layouts/contentNavbarLayout')
 @section('title', 'Proses Produk Masuk')
 @section('content')
+<style>
+    .my-swal-popup {
+        z-index: 1200 !important;
+    }
+
+    .swal2-backdrop-show {
+        z-index: 1200 !important;
+        background-color: rgba(0, 0, 0, 0.4) !important;
+    }
+
+    .navbar,
+    .sidebar {
+        z-index: 1200 !important;
+    }
+</style>
 <div class="container-xxl flex-grow-1">
     <h5 class="fw-bold py-3 mb-4">
         <span class="text-muted fw-light">Monitoring Produk /</span> Proses Produk Masuk
@@ -8,19 +23,19 @@
 
     <div class="row">
         <!-- Form Checkout -->
-        <div class="col-xxl-8 col-xl-12 col-lg-12">
+        <div class="col-xxl-8 col-xl-7 col-lg-7">
             <div class="card mb-4">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0">Detail Produk Masuk</h5>
+                    <h5 class="mb-0">Detail Penambahan Stok</h5>
                 </div>
                 <div class="card-body">
                     <form id="form-tambah-produk" method="POST">
                         @csrf
                         <div class="mb-3">
                             <label class="form-label" for="merek_id">Merek Produk</label>
-                            <div class="input-group">
+                            <div class="input-group input-group-merge">
                                 <span class="input-group-text"><i class="bx bx-category"></i></span>
-                                <select class="form-select" id="merek_id" name="merek_id" required>
+                                <select class="form-select" id="merek_select" name="merek_id" required>
                                     <option value="" selected disabled>Pilih Merek</option>
                                     @foreach($listMerek as $merek)
                                     <option value="{{$merek->id}}">{{$merek->nama}}</option>
@@ -30,28 +45,31 @@
                         </div>
 
                         <hr class="my-4">
-                        <h5 class="mb-3">Daftar Produk</h5>
+                        <h5 class="mb-3">Detail Produk</h5>
 
                         <div id="produk-container">
-                            <div class="row produk-item mb-3">
-                                <div class="col-4">
+                            <div class="row produk-item mb-4 pb-2 border-bottom">
+                                <div class="col-xxl-4 mb-2">
                                     <label class="form-label" for="nama_produk">Nama Produk</label>
                                     <input type="text" class="form-control" id="nama_produk" name="nama_produk[]" placeholder="Masukkan Nama Produk" required />
                                 </div>
-                                <div class="col-2">
+                                <div class="col-xxl-2 mb-2">
                                     <label class="form-label" for="jumlah_0">Jumlah</label>
-                                    <input type="number" class="form-control" id="jumlah_0" name="jumlah[]" min="1" value="1" required />
+                                    <div class="input-group input-group-merge">
+                                        <span class="input-group-text"></i></span>
+                                        <input type="number" class="form-control" id="jumlah_0" name="jumlah[]" min="1" value="1" required />
+                                    </div>
                                 </div>
-                                <div class="col-4">
-                                    <label class="form-label" for="harga_0">Harga Satuan</label>
+                                <div class="col-xxl-3 mb-2">
+                                    <label class="form-label" for="jumlah_0">Harga Satuan</label>
                                     <div class="input-group">
                                         <span class="input-group-text">Rp</span>
                                         <input type="number" class="form-control harga-input" id="harga_0" name="harga[]" min="0" required />
                                     </div>
                                 </div>
-                                <div class="col-1 d-flex align-items-end">
-                                    <button type="button" class="btn btn-outline-danger mb-0 btn-hapus-barang" disabled>
-                                        <i class="bx bx-trash"></i>
+                                <div class="col-xxl-2 d-flex align-items-end mb-2">
+                                    <button type="button" class="btn btn-outline-danger btn-hapus-barang w-100" disabled>
+                                        <i class="bx bx-trash me-1"></i> Hapus
                                     </button>
                                 </div>
                             </div>
@@ -66,8 +84,10 @@
                         </div>
 
                         <div class="row justify-content-end mt-4">
-                            <div class="col-12">
-                                <button type="submit" class="btn btn-primary">Simpan Barang Masuk</button>
+                            <div class="col-xxl-4 col-12">
+                                <button type="submit" class="btn btn-primary w-100">
+                                    <i class="bx bx-save me-1"></i> Simpan Stok
+                                </button>
                             </div>
                         </div>
                     </form>
@@ -76,15 +96,50 @@
         </div>
 
         <!-- Summary Card -->
-        <div class="col-xxl-4 col-xl-12 col-lg-12">
+        <div class="col-xxl-4 col-xl-5 col-lg-5">
+            <!-- Ringkasan Pengisian -->
+            <div class="card mb-4">
+                <div class="card-header d-flex justify-content-between">
+                    <h5 class="mb-0">Ringkasan Penambahan</h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between mb-3">
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="badge bg-label-primary rounded p-2">
+                                <i class="bx bx-package fs-5"></i>
+                            </span>
+                            <div>
+                                <h6 class="mb-0">Total Produk</h6>
+                                <small class="text-muted">Jumlah jenis produk</small>
+                            </div>
+                        </div>
+                        <h5 id="total-items" class="mb-0 fs-6">1 item</h5>
+                    </div>
+
+                    <div class="d-flex justify-content-between mb-3">
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="badge bg-label-success rounded p-2">
+                                <i class="bx bx-list-check fs-5"></i>
+                            </span>
+                            <div>
+                                <h6 class="mb-0">Total Kuantitas</h6>
+                                <small class="text-muted">Jumlah unit masuk</small>
+                            </div>
+                        </div>
+                        <h5 id="total-quantity" class="mb-0 fs-6">0 pcs</h5>
+                    </div>
+                </div>
+            </div>
+
             <!-- Recent Entry Card -->
             <div class="card">
-                <div class="card-header">
+                <div class="card-header d-flex justify-content-between">
                     <h5 class="mb-0">Barang Masuk Hari Ini</h5>
+                    <p class="text-danger font-bold ">{{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}</p>
                 </div>
-                <div class="card-body" style="max-height: 510px; overflow-y: auto;">
+                <div class="card-body" style="max-height: 310px; overflow-y: auto;">
                     <ul class="p-0 m-0">
-                        @foreach($listProduk as $produk)
+                        @forelse($listProduk as $produk)
                         <li class="d-flex mb-3 pb-2 border-bottom">
                             <div class="avatar flex-shrink-0 me-3">
                                 <span class="avatar-initial rounded bg-label-primary">
@@ -94,14 +149,18 @@
                             <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                                 <div class="me-2">
                                     <h6 class="mb-0">{{$produk->nama}}</h6>
-                                    <small class="text-muted">{{$produk->merek->nama}}</small>
-                                </div>
-                                <div class="user-progress">
-                                    <small class="fw-semibold">{{$produk->jumlah}} pcs</small>
+                                    <small class="text-muted">
+                                        {{$produk->merek->nama}} •
+                                        produk masuk pukul {{ \Carbon\Carbon::parse($produk->created_at)->format('H:i') }}
+                                    </small>
                                 </div>
                             </div>
                         </li>
-                        @endforeach
+                        @empty
+                        <li class="text-center py-3">
+                            <span class="text-muted">Belum ada barang masuk hari ini</span>
+                        </li>
+                        @endforelse
                     </ul>
                 </div>
             </div>
@@ -123,7 +182,15 @@
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
             success: function(response) {
-                location.reload();
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil!',
+                    text: 'Produk berhasil disimpan',
+                    showConfirmButton: false,
+                    timer: 1700
+                }).then(() => {
+                    location.reload();
+                });
             },
             error: function(xhr) {
                 const message = xhr.responseJSON?.message || 'Terjadi kesalahan tak diketahui';
@@ -147,24 +214,24 @@
             const newItem = document.createElement('div');
             newItem.className = 'row produk-item mb-3';
             newItem.innerHTML = `
-      <div class="col-4">
+      <div class="col-xxl-4 mb-2">
         <label class="form-label" for="nama_produk_${itemCounter}">Nama Produk</label>
         <input type="text" class="form-control" id="nama_produk_${itemCounter}" name="nama_produk[]" placeholder="Masukkan Nama Produk" required />
       </div>
-      <div class="col-2">
+      <div class="col-xxl-2 mb-2">
         <label class="form-label" for="jumlah_${itemCounter}">Jumlah</label>
         <input type="number" class="form-control" id="jumlah_${itemCounter}" name="jumlah[]" min="1" value="1" required />
       </div>
-      <div class="col-4">
+      <div class="col-xxl-3 mb-2">
         <label class="form-label" for="harga_${itemCounter}">Harga Satuan</label>
         <div class="input-group">
           <span class="input-group-text">Rp</span>
           <input type="number" class="form-control harga-input" id="harga_${itemCounter}" name="harga[]" min="0" required />
         </div>
       </div>
-      <div class="col-1 d-flex align-items-end">
-        <button type="button" class="btn btn-outline-danger mb-0 btn-hapus-barang">
-          <i class="bx bx-trash"></i>
+      <div class="col-xxl-2 d-flex align-items-end mb-2">
+        <button type="button" class="btn btn-outline-danger mb-0 btn-hapus-barang w-100">
+          <i class="bx bx-trash"></i> Hapus
         </button>
       </div>
     `;
