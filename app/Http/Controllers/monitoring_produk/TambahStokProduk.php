@@ -29,7 +29,7 @@ class TambahStokProduk extends Controller
     {
         $listMerek = $this->merekService->fetchAll();
         $listProduk = $this->produkService->fetchDataToday();
-        $logStokProduk = $this->logStokProduk->fetchToday();
+        $logStokProduk = $this->logStokProduk->fetchToday($type_stock = 'add_stock');
 
         return view('content.monitoring-produk.tambah-stok-produk.index', compact('listMerek', 'listProduk', 'logStokProduk'));
     }

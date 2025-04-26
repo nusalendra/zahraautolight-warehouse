@@ -25,12 +25,12 @@
         <div class="col-xxl-8 col-xl-7 col-lg-7">
             <div class="card mb-4">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0">Detail Penambahan Stok</h5>
+                    <h5 class="mb-0">Form Penambahan Stok</h5>
                 </div>
                 <div class="card-body">
                     <div class="alert alert-danger font-bold">
                         <i class="bx bx-info-circle me-1"></i>
-                        Pastikan Anda menentukan jumlah produk terlebih dahulu sebelum memilih merek!
+                        Klik tombol "+ Tambah Produk" dulu, lalu tentukan jumlah produk sebelum memilih merek!
                     </div>
                     <form id="form-tambah-produk" method="POST">
                         @csrf
@@ -202,7 +202,7 @@
         submitBtn.attr('disabled', true);
 
         $.ajax({
-            url: '/api/add-stock-product',
+            url: '/api/process-stock-product?type_stock=add_stock',
             method: 'POST',
             data: $(this).serialize(),
             headers: {

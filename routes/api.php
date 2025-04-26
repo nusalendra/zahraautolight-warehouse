@@ -10,4 +10,4 @@ Route::delete('delete-merek/{id}', [Merek::class, 'delete']);
 
 Route::get('/get-product-by-merek/{merekId}', [Produk::class, 'getProductByMerek']);
 Route::post('add-product', [Produk::class, 'store']);
-Route::post('add-stock-product', [Produk::class, 'addStock']);
+Route::post('process-stock-product', [Produk::class, 'processStockProduct']);

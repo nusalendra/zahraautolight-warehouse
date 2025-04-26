@@ -19,6 +19,7 @@ class LogStokProductDto
 
         $dto->products[] = [
             'produk_id' => $dto->produk_id,
+            'type' => $request->type_stock,
             'status' => 'success',
             'stok' => $request->stok,
             'created_at' => now(),

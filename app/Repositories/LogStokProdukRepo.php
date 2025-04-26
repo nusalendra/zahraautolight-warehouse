@@ -11,8 +11,8 @@ class LogStokProdukRepo
         return LogStokProduk::insert($data);
     }
 
-    public function fetchToday()
+    public function fetchToday(string $type)
     {
-        return LogStokProduk::whereDate('created_at', today())->get();
+        return LogStokProduk::where('type', $type)->whereDate('created_at', today())->get();
     }
 }
