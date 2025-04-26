@@ -1,3 +1,7 @@
+@php
+$container = 'container-fluid';
+$containerNav = 'container-fluid';
+@endphp
 @extends('layouts/contentNavbarLayout')
 @section('title', 'Tambah Stok Produk')
 @section('content')
@@ -16,10 +20,30 @@
         z-index: 1200 !important;
     }
 </style>
-<div class="container-xxl flex-grow-1">
-    <h5 class="fw-bold py-3 mb-4">
-        <span class="text-muted fw-light">Monitoring Produk /</span> Tambah Stok Produk
-    </h5>
+<div class="px-5 flex-grow-1">
+    <div class="d-flex justify-content-between align-items-center mb-5">
+        <div class="d-flex align-items-center">
+            <div class="me-3">
+                <span class="badge bg-primary p-2 rounded-circle">
+                    <i class="bx bx-package fs-4"></i>
+                </span>
+            </div>
+            <div>
+                <h5 class="fw-bold mb-0">Tambah Stok Produk</h5>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb m-0 p-0 small">
+                        <li class="breadcrumb-item"><a href="#" class="text-primary">Monitoring Produk</a></li>
+                        <li class="breadcrumb-item active">Tambah Stok Produk</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <div>
+            <span class="badge bg-label-primary p-2">
+                <i class="bx bx-calendar me-1"></i> {{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}
+            </span>
+        </div>
+    </div>
     <div class="row">
         <!-- Form Tambah Stok -->
         <div class="col-xxl-8 col-xl-7 col-lg-7">
@@ -98,7 +122,7 @@
             <!-- Ringkasan Pengisian -->
             <div class="card mb-4">
                 <div class="card-header d-flex justify-content-between">
-                    <h5 class="mb-0">Ringkasan Penambahan</h5>
+                    <h5 class="mb-0">Ringkasan Stok Produk</h5>
                 </div>
                 <div class="card-body">
                     <div class="d-flex justify-content-between mb-3">
@@ -133,7 +157,6 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
                     <h5 class="mb-0">Stok Masuk Hari Ini</h5>
-                    <p class="text-danger font-bold ">{{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}</p>
                 </div>
                 <div class="card-body" style="max-height: 310px; overflow-y: auto;">
                     <ul class="p-0 m-0">
