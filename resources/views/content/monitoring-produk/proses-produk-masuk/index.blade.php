@@ -17,7 +17,7 @@ $containerNav = 'container-fluid';
 
     .navbar,
     .sidebar {
-        z-index: 1200 !important;
+        z-index: 1000 !important;
     }
 </style>
 <div class="px-5 flex-grow-1">

@@ -48,6 +48,7 @@ use App\Http\Controllers\monitoring_produk\ProdukKeluar;
 use App\Http\Controllers\monitoring_produk\ProdukMasuk;
 use App\Http\Controllers\monitoring_produk\TambahStokProduk;
 use App\Http\Controllers\tables\Basic as TablesBasic;
+use App\Http\Controllers\users\ListUser;
 
 // Main Page Route
 Route::middleware('guest')->group(function () {
@@ -61,6 +62,10 @@ Route::middleware('auth')->group(function () {
         Route::post('/logout', [LoginBasic::class, 'logout']);
         Route::prefix('manajemen-barang')->name('manajemen-barang.')->group(function () {
             Route::get('/list', [ListBarang::class, 'index'])->name('list');
+        });
+
+        Route::prefix('users')->name('users.')->group(function () {
+            Route::get('/list', [ListUser::class, 'index'])->name('list');
         });
     });
 
