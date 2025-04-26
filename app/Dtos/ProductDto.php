@@ -31,8 +31,7 @@ class ProductDto
                     'merek_id' => $dto->merek_id,
                     'nama' => $namaProduk,
                     'stok' => (int) $jumlah[$index],
-                    'harga_satuan' => (int) $harga[$index],
-                    'total' => (int) $jumlah[$index] * (int) $harga[$index],
+                    'harga' => (int) $harga[$index],
                     'created_at' => now(),
                     'updated_at' => now()
                 ];

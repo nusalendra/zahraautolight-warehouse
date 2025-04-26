@@ -11,8 +11,7 @@ class Produk extends Model
         'merek_id',
         'nama',
         'jumlah',
-        'harga_satuan',
-        'total'
+        'harga_satuan'
     ];
 
     public function merek()
