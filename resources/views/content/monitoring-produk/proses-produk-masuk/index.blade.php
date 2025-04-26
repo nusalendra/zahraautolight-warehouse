@@ -26,7 +26,7 @@
         <div class="col-xxl-8 col-xl-7 col-lg-7">
             <div class="card mb-4">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0">Detail Penambahan Stok</h5>
+                    <h5 class="mb-0">Form Penambahan Produk</h5>
                 </div>
                 <div class="card-body">
                     <form id="form-tambah-produk" method="POST">
@@ -86,7 +86,7 @@
                         <div class="row justify-content-end mt-4">
                             <div class="col-xxl-4 col-12">
                                 <button type="submit" class="btn btn-primary w-100">
-                                    <i class="bx bx-save me-1"></i> Simpan Stok
+                                    <i class="bx bx-log-in me-1"></i> Simpan Produk
                                 </button>
                             </div>
                         </div>

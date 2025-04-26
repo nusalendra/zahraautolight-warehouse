@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\API\monitoring_produk;
 
-use App\Dtos\AddStockProductDto;
+use App\Dtos\StockProductDto;
 use App\Dtos\ProductDto;
 use App\Http\Controllers\Controller;
 use App\Http\Services\ProdukService;
@@ -57,11 +57,11 @@ class Produk extends Controller
         }
     }
 
-    public function addStock(Request $request)
+    public function processStockProduct(Request $request)
     {
         try {
-            $productDto = AddStockProductDto::fromRequest($request);
-            $result = $this->produkService->addStockProduct($productDto->products);
+            $productDto = StockProductDto::fromRequest($request);
+            $result = $this->produkService->processStock($productDto->products);
 
             return $result;
         } catch (\Throwable $th) {

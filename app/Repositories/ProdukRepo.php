@@ -36,4 +36,15 @@ class ProdukRepo
             'status' => 1
         ];
     }
+
+    public function reduceStockProduct(array $data)
+    {
+        $produk = Produk::find($data['id']);
+        $produk->stok -= $data['stok'];
+        $produk->save();
+
+        return [
+            'status' => 1
+        ];
+    }
 }

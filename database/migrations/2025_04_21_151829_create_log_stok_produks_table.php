@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('log_stok_produks', function (Blueprint $table) {
             $table->id();
             $table->integer('produk_id');
+            $table->string('type');
             $table->string('status');
             $table->integer('stok');
             $table->timestamps();

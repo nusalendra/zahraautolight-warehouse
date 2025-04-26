@@ -40,12 +40,17 @@ class ProdukService
         return $this->produkRepo->fetchToday();
     }
 
-    public function addStockProduct(array $data)
+    public function processStock(array $data)
     {
         try {
             foreach ($data as $produk) {
-                $responseAddStok = $this->produkRepo->addStockProduct($produk);
-                if ($responseAddStok['status'] == 1) {
+                if ($produk['type_stock'] == 'add_stock') {
+                    $response = $this->produkRepo->addStockProduct($produk);
+                } elseif ($produk['type_stock'] == 'reduce_stock') {
+                    $response = $this->produkRepo->reduceStockProduct($produk);
+                }
+
+                if ($response['status'] == 1) {
                     $logStokProdukDto = LogStokProductDto::fromRequest((object) $produk);
                     $addLogStokProduk = $this->logStokProdukRepo->addLog($logStokProdukDto->products);
                 }

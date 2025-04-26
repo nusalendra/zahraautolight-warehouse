@@ -9,6 +9,7 @@ class LogStokProduk extends Model
     protected $table = "log_stok_produks";
     protected $fillable = [
         'produk_id',
+        'type',
         'status',
         'stok',
     ];
