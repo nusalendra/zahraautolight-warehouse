@@ -26,12 +26,12 @@
     {
       "name": "Users",
       "icon": "menu-icon tf-icons bx bx-user",
-      "slug": "layouts",
+      "slug": "users",
       "submenu": [
         {
-          "url": "layouts/without-menu",
-          "name": "Karyawan",
-          "slug": "layouts-without-menu"
+          "url": "users/list",
+          "name": "List",
+          "slug": "users.list"
         }
       ]
     },
