@@ -10,8 +10,8 @@ class Produk extends Model
     protected $fillable = [
         'merek_id',
         'nama',
-        'jumlah',
-        'harga_satuan'
+        'stok',
+        'harga'
     ];
 
     public function merek()

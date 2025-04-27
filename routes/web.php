@@ -43,6 +43,7 @@ use App\Http\Controllers\form_elements\InputGroups;
 use App\Http\Controllers\form_layouts\VerticalForm;
 use App\Http\Controllers\form_layouts\HorizontalForm;
 use App\Http\Controllers\manajemen_barang\ListBarang;
+use App\Http\Controllers\manajemen_produk\ListProduk;
 use App\Http\Controllers\monitoring_produk\Merek;
 use App\Http\Controllers\monitoring_produk\ProdukKeluar;
 use App\Http\Controllers\monitoring_produk\ProdukMasuk;
@@ -60,8 +61,8 @@ Route::middleware('auth')->group(function () {
     Route::middleware('role:Admin')->group(function () {
         Route::get('/dashboard', [Analytics::class, 'index'])->name('dashboard-analytics');
         Route::post('/logout', [LoginBasic::class, 'logout']);
-        Route::prefix('manajemen-barang')->name('manajemen-barang.')->group(function () {
-            Route::get('/list', [ListBarang::class, 'index'])->name('list');
+        Route::prefix('manajemen-produk')->name('manajemen-produk.')->group(function () {
+            Route::get('/list', [ListProduk::class, 'index'])->name('list');
         });
 
         Route::prefix('users')->name('users.')->group(function () {

@@ -47,4 +47,50 @@ class ProdukRepo
             'status' => 1
         ];
     }
+
+    public function update(int $id, array $data)
+    {
+        $produk = Produk::find($id);
+
+        if (empty($produk)) {
+            return [
+                'status' => 'error',
+                'message' => 'Produk Tidak Ditemukan'
+            ];
+        }
+
+        if ($data['merek_id'] == 0) {
+            $data['merek_id'] = $produk->merek_id;
+        }
+
+        $produk->update([
+            'merek_id' => $data['merek_id'],
+            'nama' => $data['nama'] ?? $produk->nama,
+            'harga' => $data['harga'] ?? $produk->harga
+        ]);
+
+        return [
+            'status' => 'success',
+            'message' => 'Produk berhasil diperbarui'
+        ];
+    }
+
+    public function delete($id)
+    {
+        $produk = Produk::find($id);
+
+        if (empty($produk)) {
+            return [
+                'status' => 'error',
+                'message' => 'Produk Tidak Ditemukan'
+            ];
+        }
+
+        $produk->delete();
+
+        return [
+            'status' => 'success',
+            'message' => 'Produk berhasil dihapus'
+        ];
+    }
 }
