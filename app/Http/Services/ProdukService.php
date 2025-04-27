@@ -40,33 +40,40 @@ class ProdukService
         return $this->produkRepo->fetchToday();
     }
 
-    public function processStock(array $data)
+    public function processStock(string $type_stock, array $data)
     {
-        try {
-            foreach ($data as $produk) {
-                if ($produk['type_stock'] == 'add_stock') {
-                    $response = $this->produkRepo->addStockProduct($produk);
-                } elseif ($produk['type_stock'] == 'reduce_stock') {
-                    $response = $this->produkRepo->reduceStockProduct($produk);
-                }
+        if ($type_stock == 'reduce_stock') {
+            $checkStockReady = $this->checkStockReady($data);
 
-                $produk['harga'] = $response['data']->harga;
+            if ($checkStockReady['status'] == 0) {
+                $productDetails = array_map(function ($product) {
+                    return $product['name'] . ' (Stok Tersedia: ' . $product['remainingStock'] . ')';
+                }, $checkStockReady['products']);
 
-                if ($response['status'] == 1) {
-                    $logStokProdukDto = LogStokProductDto::fromRequest((object) $produk);
-                    $addLogStokProduk = $this->logStokProdukRepo->addLog($logStokProdukDto->products);
-                }
+                $productList = implode(', ', $productDetails);
+
+                throw new \Exception('Stok tidak mencukupi untuk produk: ' . $productList);
+            }
+        }
+
+        foreach ($data as $produk) {
+            if ($produk['type'] == 'add_stock') {
+                $response = $this->produkRepo->addStockProduct($produk);
+            } elseif ($produk['type'] == 'reduce_stock') {
+                $response = $this->produkRepo->reduceStockProduct($produk);
             }
 
-            return [
-                'status' => 'success',
-            ];
-        } catch (\Throwable $th) {
-            return [
-                'status' => 'error',
-                'message' => $th->getMessage(),
-            ];
+            $produk['harga'] = $response['data']->harga;
+
+            if ($response['status'] == 1) {
+                $logStokProdukDto = LogStokProductDto::fromRequest((object) $produk);
+                $addLogStokProduk = $this->logStokProdukRepo->addLog($logStokProdukDto->products);
+            }
         }
+
+        return [
+            'status' => 'success',
+        ];
     }
 
     public function fetchByMerekId(int $id)
@@ -95,6 +102,28 @@ class ProdukService
 
         return [
             'status' => 'success'
+        ];
+    }
+
+    private function checkStockReady(array $data)
+    {
+        $productsLowStock = [];
+
+        foreach ($data as $product) {
+            $fetchProduct = $this->produkRepo->fetchById($product['id']);
+
+            if ($fetchProduct->stok < $product['stok']) {
+                $productsLowStock[] = [
+                    'name' => $fetchProduct->nama,
+                    'requestedStock' => $product['stok'],
+                    'remainingStock' => $fetchProduct->stok
+                ];
+            }
+        }
+
+        return [
+            'status' => empty($productsLowStock) ? 1 : 0,
+            'products' => $productsLowStock
         ];
     }
 }

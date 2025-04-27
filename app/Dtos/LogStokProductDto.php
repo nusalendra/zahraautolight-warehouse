@@ -22,7 +22,7 @@ class LogStokProductDto
 
         $dto->products[] = [
             'produk_id' => $dto->produk_id,
-            'type' => $request->type_stock,
+            'type' => $request->type,
             'status' => 'success',
             'stok' => $request->stok,
             'harga' => $dto->harga,

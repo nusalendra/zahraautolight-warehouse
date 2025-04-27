@@ -61,7 +61,7 @@ class Produk extends Controller
     {
         try {
             $productDto = StockProductDto::fromRequest($request);
-            $result = $this->produkService->processStock($productDto->products);
+            $result = $this->produkService->processStock($productDto->type_stock, $productDto->products);
 
             return $result;
         } catch (\Throwable $th) {
