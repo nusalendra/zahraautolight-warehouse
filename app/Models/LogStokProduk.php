@@ -12,6 +12,7 @@ class LogStokProduk extends Model
         'type',
         'status',
         'stok',
+        'harga'
     ];
 
     public function produk()

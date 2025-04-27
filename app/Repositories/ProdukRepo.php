@@ -33,7 +33,8 @@ class ProdukRepo
         $produk->save();
 
         return [
-            'status' => 1
+            'status' => 1,
+            'data' => $produk
         ];
     }
 
