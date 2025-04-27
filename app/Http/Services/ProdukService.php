@@ -50,6 +50,8 @@ class ProdukService
                     $response = $this->produkRepo->reduceStockProduct($produk);
                 }
 
+                $produk['harga'] = $response['data']->harga;
+
                 if ($response['status'] == 1) {
                     $logStokProdukDto = LogStokProductDto::fromRequest((object) $produk);
                     $addLogStokProduk = $this->logStokProdukRepo->addLog($logStokProdukDto->products);
