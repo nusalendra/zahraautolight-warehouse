@@ -25,6 +25,9 @@ $containerNav = 'container-fluid';
                 </nav>
             </div>
         </div>
+        <button type="button" class="btn btn-primary" id="modalFilterLaporanButton" data-bs-toggle="modal" data-bs-target="#modalFilterLaporan">
+            <i class="bx bx-upload me-1"></i> Cetak Laporan
+        </button>
     </div>
     <div class="card">
         <div class="card p-7">
@@ -69,7 +72,7 @@ $containerNav = 'container-fluid';
                                 <td>
                                     <div class="d-flex px-2 py-1">
                                         <div class="d-flex flex-column justify-content-center">
-                                            <h6 class="mb-0 text-sm">Rp. {{ number_format($item->produk->harga, 0, ',', '.') }}</h6>
+                                            <h6 class="mb-0 text-sm">Rp. {{ number_format($item->harga, 0, ',', '.') }}</h6>
                                         </div>
                                     </div>
                                 </td>
@@ -84,7 +87,7 @@ $containerNav = 'container-fluid';
                                     <div class="d-flex px-2 py-1">
                                         <div class="d-flex flex-column justify-content-center">
                                             <h6 class="mb-0 text-sm">
-                                                Rp. {{ number_format($item->produk->harga * $item->stok, 0, ',', '.') }}
+                                                Rp. {{ number_format($item->harga * $item->stok, 0, ',', '.') }}
                                             </h6>
                                         </div>
                                     </div>
@@ -93,7 +96,7 @@ $containerNav = 'container-fluid';
                                     <div class="d-flex px-2 py-1">
                                         <div class="d-flex flex-column justify-content-center">
                                             <h6 class="mb-0 text-sm">
-                                                {{ $item->created_at->format('d F Y / H:i:s') }}
+                                                {{ $item->created_at->format('d F Y') }}
                                             </h6>
                                         </div>
                                     </div>
@@ -109,6 +112,32 @@ $containerNav = 'container-fluid';
                         let table = new DataTable('#myTable');
                     </script>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalFilterLaporan" tabindex="-1" aria-labelledby="modalFilterLaporanLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalFilterLaporanLabel">Filter Tanggal Laporan</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="/cetak-laporan" method="GET" target="_blank">
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="start_date" class="form-label">Tanggal Awal</label>
+                            <input type="date" class="form-control" id="start_date" name="start_date" value="{{ request('start_date', date('Y-m-01')) }}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="end_date" class="form-label">Tanggal Akhir</label>
+                            <input type="date" class="form-control" id="end_date" name="end_date" value="{{ request('end_date', date('Y-m-d')) }}" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary me-1" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary">Cetak Laporan</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

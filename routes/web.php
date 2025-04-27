@@ -66,6 +66,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/list', [ListProduk::class, 'index'])->name('list');
             Route::get('/laporan', [Laporan::class, 'index'])->name('laporan');
         });
+        Route::get('/cetak-laporan', [Laporan::class, 'cetakLaporan'])->name('cetak-laporan');
 
         Route::prefix('users')->name('users.')->group(function () {
             Route::get('/list', [ListUser::class, 'index'])->name('list');
