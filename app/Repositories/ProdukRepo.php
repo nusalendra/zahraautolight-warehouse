@@ -45,7 +45,8 @@ class ProdukRepo
         $produk->save();
 
         return [
-            'status' => 1
+            'status' => 1,
+            'data' => $produk
         ];
     }
 
@@ -93,5 +94,10 @@ class ProdukRepo
             'status' => 'success',
             'message' => 'Produk berhasil dihapus'
         ];
+    }
+
+    public function fetchById(int $id)
+    {
+        return Produk::find($id);
     }
 }

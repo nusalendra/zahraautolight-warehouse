@@ -235,7 +235,7 @@ $containerNav = 'container-fluid';
                 Swal.fire({
                     icon: 'success',
                     title: 'Berhasil!',
-                    text: 'Data stok produk berhasil disimpan',
+                    text: 'Produk berhasil dikeluarkan',
                     showConfirmButton: false,
                     timer: 1700
                 }).then(() => {
