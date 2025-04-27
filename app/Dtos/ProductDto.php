@@ -40,4 +40,21 @@ class ProductDto
 
         return $dto;
     }
+
+    public static function fromRequestListProduct($request): self
+    {
+        $dto = new self();
+
+        $dto->merek_id = $request->merek_id ?? 0;
+        $dto->nama_produk = $request->produk ?? '';
+        $dto->harga = $request->harga ?? 0;
+
+        $dto->products[] = [
+            'merek_id' => $dto->merek_id,
+            'nama' => $dto->nama_produk,
+            'harga' => $dto->harga,
+        ];
+
+        return $dto;
+    }
 }

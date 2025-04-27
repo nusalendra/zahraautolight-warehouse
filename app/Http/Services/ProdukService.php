@@ -71,4 +71,28 @@ class ProdukService
     {
         return $this->produkRepo->fetchProductByMerekId($id);
     }
+
+    public function update(int $id, array $data)
+    {
+        $response = $this->produkRepo->update($id, $data[0]);
+        if ($response['status'] == 'error') {
+            throw new \Exception($response['message']);
+        }
+
+        return [
+            'status' => 'success'
+        ];
+    }
+
+    public function deleteProduct(int $id)
+    {
+        $response = $this->produkRepo->delete($id);
+        if ($response['status'] == 'error') {
+            throw new \Exception($response['message']);
+        }
+
+        return [
+            'status' => 'success'
+        ];
+    }
 }

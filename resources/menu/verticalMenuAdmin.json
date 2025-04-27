@@ -7,19 +7,19 @@
       "url": "dashboard"
     },
     {
-      "name": "Manajemen Barang",
+      "name": "Manajemen Produk",
       "icon": "menu-icon tf-icons bx bxs-package",
-      "slug": "manajemen-barang",
+      "slug": "manajemen-produk",
       "submenu": [
         {
-          "url": "manajemen-barang/list",
-          "name": "List Barang",
-          "slug": "manajemen-barang.list"
+          "url": "manajemen-produk/list",
+          "name": "List Produk",
+          "slug": "manajemen-produk.list"
         },
         {
-          "url": "manajemen-barang/laporan",
+          "url": "manajemen-produk/laporan",
           "name": "Laporan",
-          "slug": "manajemen-barang.laporan"
+          "slug": "manajemen-produk.laporan"
         }
       ]
     },
