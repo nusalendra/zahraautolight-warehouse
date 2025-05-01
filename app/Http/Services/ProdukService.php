@@ -3,6 +3,7 @@
 namespace App\Http\Services;
 
 use App\Dtos\LogStokProductDto;
+use App\Helpers\SendWhatsapp;
 use App\Repositories\LogStokProdukRepo;
 use App\Repositories\ProdukRepo;
 
@@ -61,9 +62,12 @@ class ProdukService
                 $response = $this->produkRepo->addStockProduct($produk);
             } elseif ($produk['type'] == 'reduce_stock') {
                 $response = $this->produkRepo->reduceStockProduct($produk);
+
+                $whatsapp = new SendWhatsapp();
+                $send = $whatsapp->handle($response['data']);
             }
 
-            $produk['harga'] = $response['data']->harga;
+            $produk['harga'] = $response['data']['harga'];
 
             if ($response['status'] == 1) {
                 $logStokProdukDto = LogStokProductDto::fromRequest((object) $produk);
