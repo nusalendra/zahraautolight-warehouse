@@ -221,7 +221,7 @@ $containerNav = 'container-fluid';
         // Loading state
         const submitBtn = $(this).find('button[type="submit"]');
         const originalText = submitBtn.html();
-        submitBtn.html('<i class="bx bx-loader-alt bx-spin me-1"></i> Menyimpan...');
+        submitBtn.html('<i class="bx bx-loader-alt bx-spin me-1"></i> Memproses...');
         submitBtn.attr('disabled', true);
 
         $.ajax({

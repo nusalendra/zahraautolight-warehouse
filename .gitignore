@@ -11,6 +11,7 @@
 .env.backup
 .env.production
 .phpunit.result.cache
+.env
 
 docker-compose.override.yml
 
@@ -26,3 +27,6 @@ yarn-error.log
 !/public/assets/*
 /public/css
 /public/js
+
+whatsapp-service/node_modules/
+whatsapp-service/.wwebjs_cache/

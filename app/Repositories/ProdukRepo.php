@@ -40,13 +40,16 @@ class ProdukRepo
 
     public function reduceStockProduct(array $data)
     {
-        $produk = Produk::find($data['id']);
+        $produk = Produk::with('merek')->find($data['id']);
         $produk->stok -= $data['stok'];
         $produk->save();
 
+        $produkWithReduceStock = $produk->toArray();
+        $produkWithReduceStock['reduce_stock'] = $data['stok'];
+
         return [
             'status' => 1,
-            'data' => $produk
+            'data' => $produkWithReduceStock
         ];
     }
 
