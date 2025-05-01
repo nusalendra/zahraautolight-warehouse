@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\LogStokProduk;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class LogStokProdukRepo
@@ -39,5 +40,34 @@ class LogStokProdukRepo
             ->get();
 
         return $query;
+    }
+
+    public function getTotalProductStockOut()
+    {
+        return LogStokProduk::where('type', 'reduce_stock')
+            ->where('status', 'success')
+            ->sum('stok');
+    }
+
+    public function getMonthlyIncomeProductOut()
+    {
+        $currentYear = Carbon::now()->year;
+
+        $monthlyRevenue = DB::table('log_stok_produks')
+            ->selectRaw("MONTH(created_at) as month, SUM(stok * harga) as total_pendapatan")
+            ->where('type', 'reduce_stock')
+            ->where('status', 'success')
+            ->whereYear('created_at', $currentYear)
+            ->groupBy('month')
+            ->orderBy('month')
+            ->get();
+
+        $revenueData = [];
+        for ($i = 1; $i <= 12; $i++) {
+            $monthData = $monthlyRevenue->firstWhere('month', $i);
+            $revenueData[] = $monthData ? (int) $monthData->total_pendapatan : 0;
+        }
+
+        return $revenueData;
     }
 }
