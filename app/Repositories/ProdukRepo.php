@@ -100,4 +100,14 @@ class ProdukRepo
     {
         return Produk::find($id);
     }
+
+    public function fetchTotalProduct()
+    {
+        return Produk::count();
+    }
+
+    public function fetchLowStockProducts()
+    {
+        return Produk::where('stok', '<=', 3)->get();
+    }
 }
