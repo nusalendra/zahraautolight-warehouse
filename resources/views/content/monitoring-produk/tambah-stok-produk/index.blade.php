@@ -72,7 +72,16 @@ $containerNav = 'container-fluid';
                         </div>
 
                         <hr class="my-4">
-                        <h5 class="mb-3">Detail Produk</h5>
+                        <div class="d-flex justify-content-between">
+                            <h5 class="mb-3">Detail Produk</h5>
+                            <div class="row mb-2">
+                                <div class="col-12">
+                                    <button type="button" id="btn-tambah-barang" class="btn btn-outline-primary">
+                                        <i class="bx bx-plus me-1"></i> Tambah Produk
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
 
                         <div id="produk-container">
                             <div class="row produk-item mb-4 pb-2 border-bottom">
@@ -94,14 +103,6 @@ $containerNav = 'container-fluid';
                                         <i class="bx bx-trash me-1"></i> Hapus
                                     </button>
                                 </div>
-                            </div>
-                        </div>
-
-                        <div class="row mb-4">
-                            <div class="col-12">
-                                <button type="button" id="btn-tambah-barang" class="btn btn-outline-primary">
-                                    <i class="bx bx-plus me-1"></i> Tambah Produk
-                                </button>
                             </div>
                         </div>
 
