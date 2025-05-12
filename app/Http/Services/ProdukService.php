@@ -2,8 +2,10 @@
 
 namespace App\Http\Services;
 
+use App\Dtos\InvoiceDto;
 use App\Dtos\LogStokProductDto;
 use App\Helpers\SendWhatsapp;
+use App\Repositories\InvoiceRepo;
 use App\Repositories\LogStokProdukRepo;
 use App\Repositories\ProdukRepo;
 
@@ -11,11 +13,13 @@ class ProdukService
 {
     private ProdukRepo $produkRepo;
     private LogStokProdukRepo $logStokProdukRepo;
+    private InvoiceRepo $invoiceRepo;
 
-    public function __construct(ProdukRepo $produkRepo, LogStokProdukRepo $logStokProdukRepo)
+    public function __construct(ProdukRepo $produkRepo, LogStokProdukRepo $logStokProdukRepo, InvoiceRepo $invoiceRepo)
     {
         $this->produkRepo = $produkRepo;
         $this->logStokProdukRepo = $logStokProdukRepo;
+        $this->invoiceRepo = $invoiceRepo;
     }
 
     public function create(array $data)
@@ -57,26 +61,53 @@ class ProdukService
             }
         }
 
+        $logIds = [];
+        $whatsappData = [];
+
         foreach ($data as $produk) {
             if ($produk['type'] == 'add_stock') {
                 $response = $this->produkRepo->addStockProduct($produk);
             } elseif ($produk['type'] == 'reduce_stock') {
                 $response = $this->produkRepo->reduceStockProduct($produk);
 
-                $whatsapp = new SendWhatsapp();
-                $send = $whatsapp->handle($response['data']);
+                $tanggalInvoice = $produk['tanggal_invoice'];
+                $mitraId = $produk['mitra_id'];
+                $invoiceItems[] = [
+                    'produk_id' => $response['data']['id'],
+                    'qty' => $produk['stok'],
+                    'harga' => $response['data']['harga'],
+                ];
+
+                $whatsappData[] = $response['data'];
             }
 
             $produk['harga'] = $response['data']['harga'];
 
             if ($response['status'] == 1) {
                 $logStokProdukDto = LogStokProductDto::fromRequest((object) $produk);
-                $addLogStokProduk = $this->logStokProdukRepo->addLog($logStokProdukDto->products);
+                $getIdLog = $this->logStokProdukRepo->addLog($logStokProdukDto->products);
+                $logIds[] = $getIdLog;
+            }
+        }
+
+        if ($invoiceItems && $mitraId && $tanggalInvoice) {
+            $invoiceDto = InvoiceDto::fromRequest($invoiceItems, $mitraId, $tanggalInvoice);
+            $arrayData = $invoiceDto->toArray();
+            $idInvoice = $this->invoiceRepo->create($arrayData[0]);
+
+            foreach ($logIds as $logId) {
+                $this->logStokProdukRepo->updateInvoiceIdById($logId, $idInvoice);
+            }
+
+            $whatsapp = new SendWhatsapp();
+            foreach ($whatsappData as $waData) {
+                $send = $whatsapp->handle($waData);
             }
         }
 
         return [
             'status' => 'success',
+            'invoice_id' => $idInvoice
         ];
     }
 

@@ -19,6 +19,8 @@ class StockProductDto
         }
 
         $produk_id = $request->produk_id ?? "";
+        $tanggal_invoice = $request->tanggal_invoice ?? "";
+        $mitra_id = $request->mitra_id ?? null;
         $stok = $request->jumlah ?? 0;
         $dto->type_stock = $request->query('type_stock');
 
@@ -28,6 +30,8 @@ class StockProductDto
             $dto->products[] = [
                 'id' => $id,
                 'merek_id' => $merek_id,
+                'tanggal_invoice' => $tanggal_invoice,
+                'mitra_id' => $mitra_id,
                 'stok' => (int) $stok[$index],
                 'type' => $dto->type_stock
             ];

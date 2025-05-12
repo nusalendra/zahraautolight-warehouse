@@ -13,4 +13,9 @@ class Mitra extends Model
         'email',
         'nomor_telepon'
     ];
+
+    public function invoice()
+    {
+        return $this->hasMany(Invoice::class, 'invoice_id');
+    }
 }

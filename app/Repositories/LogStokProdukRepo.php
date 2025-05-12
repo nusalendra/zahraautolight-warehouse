@@ -10,7 +10,8 @@ class LogStokProdukRepo
 {
     public function addLog(array $data)
     {
-        return LogStokProduk::insert($data);
+        $log = LogStokProduk::create($data[0]);
+        return $log->id;
     }
 
     public function fetchToday(string $type)
@@ -69,5 +70,16 @@ class LogStokProdukRepo
         }
 
         return $revenueData;
+    }
+
+    public function updateInvoiceIdById(int $id, string $invoiceId): bool
+    {
+        $log = LogStokProduk::find($id);
+
+        $log->update([
+            'invoice_id' => $invoiceId
+        ]);
+
+        return true;
     }
 }

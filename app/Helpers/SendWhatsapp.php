@@ -22,7 +22,7 @@ class SendWhatsapp
             . "*Total:* Rp " . number_format($data['harga'] * $data['reduce_stock'], 0, ',', '.') . "\n"
             . "*Stok Tersisa:* {$data['stok']} item\n\n"
             . "*Waktu:* {$waktu}\n"
-            . "*Catatan:* Stok telah diperbarui dalam sistem.";
+            . "*Catatan:* Stok telah diperbarui dalam sistem";
 
         $response = Http::post($url, [
             'phone' => $phone,
