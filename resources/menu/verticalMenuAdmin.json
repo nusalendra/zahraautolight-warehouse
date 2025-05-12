@@ -7,6 +7,12 @@
       "url": "dashboard"
     },
     {
+      "name": "Mitra",
+      "icon": "menu-icon tf-icons bx bx-user-pin",
+      "slug": "mitra.index",
+      "url": "mitra"
+    },
+    {
       "name": "Manajemen Produk",
       "icon": "menu-icon tf-icons bx bxs-package",
       "slug": "manajemen-produk",
