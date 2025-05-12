@@ -5,6 +5,7 @@ use App\Http\Controllers\dashboard\Analytics;
 use App\Http\Controllers\authentications\LoginBasic;
 use App\Http\Controllers\manajemen_produk\Laporan;
 use App\Http\Controllers\manajemen_produk\ListProduk;
+use App\Http\Controllers\MitraController;
 use App\Http\Controllers\monitoring_produk\Merek;
 use App\Http\Controllers\monitoring_produk\ProdukKeluar;
 use App\Http\Controllers\monitoring_produk\ProdukMasuk;
@@ -20,6 +21,7 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::middleware('role:Admin')->group(function () {
         Route::get('/dashboard', [Analytics::class, 'index'])->name('dashboard.index');
+        Route::get('/mitra', [MitraController::class, 'index'])->name('mitra.index');
         Route::post('/logout', [LoginBasic::class, 'logout']);
         Route::prefix('manajemen-produk')->name('manajemen-produk.')->group(function () {
             Route::get('/list', [ListProduk::class, 'index'])->name('list');
