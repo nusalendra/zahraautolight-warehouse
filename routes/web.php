@@ -10,6 +10,7 @@ use App\Http\Controllers\monitoring_produk\Merek;
 use App\Http\Controllers\monitoring_produk\ProdukKeluar;
 use App\Http\Controllers\monitoring_produk\ProdukMasuk;
 use App\Http\Controllers\monitoring_produk\TambahStokProduk;
+use App\Http\Controllers\print\Invoice;
 use App\Http\Controllers\users\ListUser;
 
 // Main Page Route
@@ -40,6 +41,11 @@ Route::middleware('auth')->group(function () {
             Route::get('/proses-produk-masuk', [ProdukMasuk::class, 'index'])->name('proses-produk-masuk');
             Route::get('/tambah-stok-produk', [TambahStokProduk::class, 'index'])->name('tambah-stok-produk');
             Route::get('/produk-keluar', [ProdukKeluar::class, 'index'])->name('produk-keluar');
+            Route::get('/invoice', function () {
+                return view('content.invoice.index');
+            });
         });
+
+        Route::get('/invoice/{id}/print', [Invoice::class, 'print'])->name('invoice.print');
     });
 });

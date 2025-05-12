@@ -58,7 +58,41 @@ $containerNav = 'container-fluid';
                     </div>
                     <form id="form-produk-keluar" method="POST">
                         @csrf
-                        <div class="mb-3">
+                        <div class="row">
+                            <div class="col-xxl-6">
+                                <label class="form-label" for="merek_id">Tanggal Invoice</label>
+                                <div class="input-group input-group-merge">
+                                    <span class="input-group-text"><i class="bx bx-calendar"></i></span>
+                                    <input type="date" class="form-control" name="tanggal_invoice" required />
+                                </div>
+                            </div>
+                            <div class="col-xxl-6">
+                                <label class="form-label" for="merek_id">Mitra</label>
+                                <div class="input-group input-group-merge">
+                                    <span class="input-group-text"><i class="bx bx-user"></i></span>
+                                    <select class="form-select" name="mitra_id" required>
+                                        <option value="" selected disabled>Pilih Mitra</option>
+                                        @foreach($listMitra as $mitra)
+                                        <option value="{{$mitra->id}}">{{$mitra->nama}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr class="my-4">
+                        <div class="d-flex justify-content-between">
+                            <h5 class="mb-3">Detail Produk</h5>
+                            <div class="row mb-2">
+                                <div class="col-12">
+                                    <button type="button" id="btn-tambah-barang" class="btn btn-outline-primary">
+                                        <i class="bx bx-plus me-1"></i> Tambah Produk
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 col-xxl-11">
                             <label class="form-label" for="merek_id">Merek Produk</label>
                             <div class="input-group input-group-merge">
                                 <span class="input-group-text"><i class="bx bx-category"></i></span>
@@ -70,9 +104,6 @@ $containerNav = 'container-fluid';
                                 </select>
                             </div>
                         </div>
-
-                        <hr class="my-4">
-                        <h5 class="mb-3">Detail Produk</h5>
 
                         <div id="produk-container">
                             <div class="row produk-item mb-4 pb-2 border-bottom">
@@ -94,14 +125,6 @@ $containerNav = 'container-fluid';
                                         <i class="bx bx-trash me-1"></i> Hapus
                                     </button>
                                 </div>
-                            </div>
-                        </div>
-
-                        <div class="row mb-4">
-                            <div class="col-12">
-                                <button type="button" id="btn-tambah-barang" class="btn btn-outline-primary">
-                                    <i class="bx bx-plus me-1"></i> Tambah Produk
-                                </button>
                             </div>
                         </div>
 
@@ -239,6 +262,7 @@ $containerNav = 'container-fluid';
                     showConfirmButton: false,
                     timer: 1700
                 }).then(() => {
+                    window.open('/invoice/' + response.invoice_id + '/print', '_blank');
                     location.reload();
                 });
             },

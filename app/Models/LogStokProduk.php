@@ -9,6 +9,7 @@ class LogStokProduk extends Model
     protected $table = "log_stok_produks";
     protected $fillable = [
         'produk_id',
+        'invoice_id',
         'type',
         'status',
         'stok',
@@ -18,5 +19,10 @@ class LogStokProduk extends Model
     public function produk()
     {
         return $this->belongsTo(Produk::class, 'produk_id');
+    }
+
+    public function invoice()
+    {
+        return $this->belongsTo(Invoice::class, 'invoice_id');
     }
 }
