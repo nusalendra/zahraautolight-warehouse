@@ -63,6 +63,8 @@ class ProdukService
 
         $logIds = [];
         $whatsappData = [];
+        $invoiceItems = [];
+        $idInvoice = 0;
 
         foreach ($data as $produk) {
             if ($produk['type'] == 'add_stock') {
