@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Merek;
+use App\Models\Mitra;
 use App\Models\Produk;
 use App\Models\Role;
 use App\Models\User;
@@ -48,6 +49,13 @@ class DatabaseSeeder extends Seeder
 
     Merek::create([
       'nama' => 'BEEBOOT',
+    ]);
+
+    Mitra::create([
+      'badan_usaha' => 'CV',
+      'nama' => 'CV. Cinta',
+      'email' => 'budisetyo@gmail.com',
+      'nomor_telepon' => '089677888764'
     ]);
   }
 }

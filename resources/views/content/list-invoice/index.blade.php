@@ -4,24 +4,9 @@ $containerNav = 'container-fluid';
 @endphp
 @extends('layouts/contentNavbarLayout')
 
-@section('title', 'Invoice')
+@section('title', 'List Invoice')
 
 @section('content')
-<style>
-    .my-swal-popup {
-        z-index: 1060 !important;
-    }
-
-    .swal2-backdrop-show {
-        z-index: 1059 !important;
-        background-color: rgba(0, 0, 0, 0.4) !important;
-    }
-
-    .navbar,
-    .sidebar {
-        z-index: 1000 !important;
-    }
-</style>
 <div class="px-5">
     <div class="d-flex justify-content-between mb-5">
         <div class="d-flex align-items-center">
@@ -54,7 +39,6 @@ $containerNav = 'container-fluid';
                                 <th class="text-uppercase text-xs font-weight-bolder text-start">Total Bayar</th>
                                 <th class="text-uppercase text-xs font-weight-bolder text-start">Sisa Tagihan</th>
                                 <th class="text-uppercase text-xs font-weight-bolder text-start">Status</th>
-                                <th class="text-uppercase text-xs font-weight-bolder text-start">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -107,18 +91,6 @@ $containerNav = 'container-fluid';
                                             @endif
                                         </div>
                                     </div>
-                                </td>
-                                <td>
-                                    @if($item->status == 'unpaid' || $item->status == 'partially_paid')
-                                    <div class="d-flex">
-                                        <a class="btn btn-primary me-2" href="/pay-invoice/{{$item->id}}">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-credit-card" viewBox="0 0 16 16">
-                                                <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1z" />
-                                                <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z" />
-                                            </svg>
-                                        </a>
-                                    </div>
-                                    @endif
                                 </td>
                             </tr>
                             @endforeach

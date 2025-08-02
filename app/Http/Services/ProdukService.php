@@ -2,9 +2,12 @@
 
 namespace App\Http\Services;
 
+use App\Actions\Invoices;
 use App\Dtos\InvoiceDto;
+use App\Dtos\InvoiceItemDto;
 use App\Dtos\LogStokProductDto;
 use App\Helpers\SendWhatsapp;
+use App\Repositories\InvoiceItemRepo;
 use App\Repositories\InvoiceRepo;
 use App\Repositories\LogStokProdukRepo;
 use App\Repositories\ProdukRepo;
@@ -14,12 +17,14 @@ class ProdukService
     private ProdukRepo $produkRepo;
     private LogStokProdukRepo $logStokProdukRepo;
     private InvoiceRepo $invoiceRepo;
+    private InvoiceItemRepo $invoiceItemRepo;
 
-    public function __construct(ProdukRepo $produkRepo, LogStokProdukRepo $logStokProdukRepo, InvoiceRepo $invoiceRepo)
+    public function __construct(ProdukRepo $produkRepo, LogStokProdukRepo $logStokProdukRepo, InvoiceRepo $invoiceRepo, InvoiceItemRepo $invoiceItemRepo)
     {
         $this->produkRepo = $produkRepo;
         $this->logStokProdukRepo = $logStokProdukRepo;
         $this->invoiceRepo = $invoiceRepo;
+        $this->invoiceItemRepo = $invoiceItemRepo;
     }
 
     public function create(array $data)
@@ -76,6 +81,7 @@ class ProdukService
                 $mitraId = $produk['mitra_id'];
                 $invoiceItems[] = [
                     'produk_id' => $response['data']['id'],
+                    'nama' => $response['data']['nama'],
                     'qty' => $produk['stok'],
                     'harga' => $response['data']['harga'],
                 ];
@@ -93,9 +99,14 @@ class ProdukService
         }
 
         if ($invoiceItems && $mitraId && $tanggalInvoice) {
-            $invoiceDto = InvoiceDto::fromRequest($invoiceItems, $mitraId, $tanggalInvoice);
-            $arrayData = $invoiceDto->toArray();
-            $idInvoice = $this->invoiceRepo->create($arrayData[0]);
+            $generateInvoice = (new Invoices($this->invoiceRepo))->generateNoInvoice($tanggalInvoice);
+            $invoiceDto = InvoiceDto::fromRequest($invoiceItems, $mitraId, $tanggalInvoice, $generateInvoice);
+            $invoiceData = $invoiceDto->toArray();
+            $idInvoice = $this->invoiceRepo->create($invoiceData[0]);
+
+            $invoiceItemDto = InvoiceItemDto::fromRequest($invoiceItems, $idInvoice);
+            $invoiceItemData = $invoiceItemDto->toArray();
+            $createInvoiceItem = $this->invoiceItemRepo->create($invoiceItemData);
 
             foreach ($logIds as $logId) {
                 $this->logStokProdukRepo->updateInvoiceIdById($logId, $idInvoice);

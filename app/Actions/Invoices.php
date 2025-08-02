@@ -2,15 +2,23 @@
 
 namespace App\Actions;
 
+use App\Models\Invoice;
 use App\Repositories\InvoiceRepo;
+use Exception;
 
 class Invoices
 {
-    public static function generateNoInvoice(string $tanggalInvoice)
+    private InvoiceRepo $invoiceRepo;
+
+    public function __construct(InvoiceRepo $invoiceRepo)
+    {
+        $this->invoiceRepo = $invoiceRepo;
+    }
+
+    public function generateNoInvoice(string $tanggalInvoice): string
     {
         $tahun = date('Y', strtotime($tanggalInvoice));
-        $invoiceRepo = new InvoiceRepo();
-        $lastInvoice = $invoiceRepo->fetchLastInvoice($tahun);
+        $lastInvoice = $this->invoiceRepo->fetchLastInvoice($tahun);
 
         if ($lastInvoice) {
             $parts = explode('/', $lastInvoice->nomor_invoice);
@@ -24,5 +32,21 @@ class Invoices
         $nomorInvoice = "INV/{$tahun}/{$nomorUrut}";
 
         return $nomorInvoice;
+    }
+
+    public function validateInvoice(int $invoice_id, float $amount_transaction): Invoice
+    {
+        $invoice = $this->invoiceRepo->fetchById($invoice_id);
+
+        if (empty($invoice))
+            throw new Exception('Invoice tidak ditemukan');
+
+        if ($invoice->status == 'paid')
+            throw new Exception('Invoice sudah paid');
+
+        if ($amount_transaction > $invoice->total)
+            throw new Exception('Nominal pembayaran melebihi total pembayaran invoice');
+
+        return $invoice;
     }
 }

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\dashboard\Analytics;
 use App\Http\Controllers\authentications\LoginBasic;
+use App\Http\Controllers\invoice\Invoice;
 use App\Http\Controllers\manajemen_produk\Laporan;
 use App\Http\Controllers\manajemen_produk\ListProduk;
 use App\Http\Controllers\MitraController;
@@ -10,7 +11,7 @@ use App\Http\Controllers\monitoring_produk\Merek;
 use App\Http\Controllers\monitoring_produk\ProdukKeluar;
 use App\Http\Controllers\monitoring_produk\ProdukMasuk;
 use App\Http\Controllers\monitoring_produk\TambahStokProduk;
-use App\Http\Controllers\print\Invoice;
+use App\Http\Controllers\transactions\Transaction;
 use App\Http\Controllers\users\ListUser;
 
 // Main Page Route
@@ -28,7 +29,11 @@ Route::middleware('auth')->group(function () {
             Route::get('/list', [ListProduk::class, 'index'])->name('list');
             Route::get('/laporan', [Laporan::class, 'index'])->name('laporan');
         });
+
         Route::get('/cetak-laporan', [Laporan::class, 'cetakLaporan'])->name('cetak-laporan');
+        Route::get('/invoice', [Invoice::class, 'index'])->name('invoice.index');
+        Route::get('/pay-invoice/{id}', [Invoice::class, 'payInvoice'])->name('pay-invoice');
+        Route::get('/transaction/{transactionId}/kwitansi', [Transaction::class, 'previewKwitansiPdf'])->name('invoice.kwitansi-pdf');
 
         Route::prefix('users')->name('users.')->group(function () {
             Route::get('/list', [ListUser::class, 'index'])->name('list');
@@ -41,11 +46,10 @@ Route::middleware('auth')->group(function () {
             Route::get('/proses-produk-masuk', [ProdukMasuk::class, 'index'])->name('proses-produk-masuk');
             Route::get('/tambah-stok-produk', [TambahStokProduk::class, 'index'])->name('tambah-stok-produk');
             Route::get('/produk-keluar', [ProdukKeluar::class, 'index'])->name('produk-keluar');
-            Route::get('/invoice', function () {
-                return view('content.invoice.index');
-            });
         });
 
-        Route::get('/invoice/{id}/print', [Invoice::class, 'print'])->name('invoice.print');
+        Route::get('/list-invoice', [Invoice::class, 'index'])->name('list-invoice.index');
+        Route::get('/invoice/{id}', [Invoice::class, 'show'])->name('invoice.show');
+        Route::get('/invoice/{id}/preview', [Invoice::class, 'previewPdf'])->name('invoice.preview-pdf');
     });
 });

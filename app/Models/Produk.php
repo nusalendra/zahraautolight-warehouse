@@ -23,4 +23,9 @@ class Produk extends Model
     {
         return $this->hasMany(LogStokProduk::class, 'produk_id');
     }
+
+    public function invoiceItem()
+    {
+        return $this->hasMany(InvoiceItem::class, 'product_id');
+    }
 }

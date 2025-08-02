@@ -22,6 +22,16 @@ class Invoice extends Model
         return $this->hasMany(LogStokProduk::class, 'invoice_id');
     }
 
+    public function invoiceItem()
+    {
+        return $this->hasMany(InvoiceItem::class, 'invoice_id');
+    }
+
+    public function transaksi()
+    {
+        return $this->hasMany(Transaction::class, 'invoice_id');
+    }
+
     public function mitra()
     {
         return $this->belongsTo(Mitra::class, 'mitra_id');
