@@ -26,6 +26,12 @@
                     "slug": "monitoring-produk.produk-keluar"
                 }
             ]
+        },
+        {
+            "name": "List Invoice",
+            "icon": "menu-icon tf-icons bx bx-list-plus",
+            "slug": "list-invoice.index",
+            "url": "list-invoice"
         }
     ]
 }

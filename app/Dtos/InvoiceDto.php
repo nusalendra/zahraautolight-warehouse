@@ -4,25 +4,25 @@ namespace App\Dtos;
 
 use App\Actions\InvoiceItems;
 use App\Actions\Invoices;
+use App\Enums\InvoiceStatus;
 
 class InvoiceDto
 {
     public int $mitra_id;
     public string $nomor_invoice;
     public string $tanggal_invoice;
-    public string $status = 'Unpaid';
+    public string $status = InvoiceStatus::UNPAID->value;
     public int $subtotal;
     public int $total;
     public int $sisa_tagihan;
     public array $data;
 
-    public static function fromRequest(array $items, int $mitraId, string $tanggalInvoice): self
+    public static function fromRequest(array $items, int $mitraId, string $tanggalInvoice, string $nomorInvoice): self
     {
         $dto = new self();
-        $generateNoInvoice = Invoices::generateNoInvoice($tanggalInvoice);
         $price = InvoiceItems::calculateItemPrice($items);
 
-        $dto->nomor_invoice = $generateNoInvoice;
+        $dto->nomor_invoice = $nomorInvoice;
         $dto->mitra_id = $mitraId;
         $dto->tanggal_invoice = $tanggalInvoice;
         $dto->subtotal = $price['subtotal'];

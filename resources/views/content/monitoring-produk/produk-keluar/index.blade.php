@@ -3,7 +3,7 @@ $container = 'container-fluid';
 $containerNav = 'container-fluid';
 @endphp
 @extends('layouts/contentNavbarLayout')
-@section('title', 'Tambah Stok Produk')
+@section('title', 'Produk Keluar')
 @section('content')
 <style>
     .my-swal-popup {
@@ -262,7 +262,7 @@ $containerNav = 'container-fluid';
                     showConfirmButton: false,
                     timer: 1700
                 }).then(() => {
-                    window.open('/invoice/' + response.invoice_id + '/print', '_blank');
+                    window.open('/invoice/' + response.invoice_id + '/preview', '_blank');
                     location.reload();
                 });
             },

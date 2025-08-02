@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\invoice\InvoicePay;
 use App\Http\Controllers\API\manajemen_produk\ListProduk;
 use App\Http\Controllers\API\mitra\Mitra;
 use App\Http\Controllers\API\monitoring_produk\Merek;
@@ -25,3 +26,5 @@ Route::delete('delete-merek/{id}', [Merek::class, 'delete']);
 Route::get('/get-product-by-merek/{merekId}', [Produk::class, 'getProductByMerek']);
 Route::post('add-product', [Produk::class, 'store']);
 Route::post('process-stock-product', [Produk::class, 'processStockProduct']);
+
+Route::post('pay-transaction', [InvoicePay::class, 'pay']);

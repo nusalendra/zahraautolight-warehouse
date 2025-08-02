@@ -30,6 +30,12 @@
       ]
     },
     {
+      "name": "Invoice",
+      "icon": "menu-icon tf-icons bx bx-list-plus",
+      "slug": "invoice.index",
+      "url": "invoice"
+    },
+    {
       "name": "Users",
       "icon": "menu-icon tf-icons bx bx-user",
       "slug": "users",

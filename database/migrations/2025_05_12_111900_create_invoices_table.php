@@ -17,9 +17,9 @@ return new class extends Migration
             $table->string('nomor_invoice');
             $table->string('tanggal_invoice');
             $table->string('status');
-            $table->integer('subtotal');
-            $table->integer('total');
-            $table->integer('sisa_tagihan');
+            $table->float('subtotal');
+            $table->float('total');
+            $table->float('sisa_tagihan');
             $table->timestamps();
         });
     }
