@@ -156,7 +156,7 @@
     <div class="container">
         <div class="header">
             <div class="logo">
-                <img src="/assets/img/icons/brands/logo-product.jpeg" alt="Zaira Automotive Lighting Logo">
+                <img src="/assets/img/icons/brands/new-logo-fatih.png" alt="Zaira Automotive Lighting Logo">
                 <div class="text-overlay">Z<span>i</span></div>
             </div>
             <div class="invoice-info">

@@ -199,7 +199,7 @@
     <div class="receipt-container">
         <div class="header">
             <div class="shop-header">
-                <img src="assets/img/icons/brands/logo-product.jpeg" alt="Zahra Auto Light" class="logo-image">
+                <img src="assets/img/icons/brands/new-logo-fatih.png" alt="Zahra Auto Light" class="logo-image">
                 <div class="shop-info">
                     <h1>Zahra Automotive Lighting</h1>
                     <p>Jl. Raya Petiken Ruko No.3, Mulung, Gresik, Jawa Timur</p>

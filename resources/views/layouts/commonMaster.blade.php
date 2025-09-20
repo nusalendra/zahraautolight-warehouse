@@ -14,7 +14,7 @@
   <!-- Canonical SEO -->
   <link rel="canonical" href="{{ config('variables.productPage') ? config('variables.productPage') : '' }}">
   <!-- Favicon -->
-  <link rel="icon" type="image/x-icon" href="{{ asset('/assets/img/icons/brands/logo-product.jpeg') }}" />
+  <link rel="icon" type="image/x-icon" href="{{ asset('/assets/img/icons/brands/new-logo-fatih.png') }}" />
 
   {{-- data table --}}
   <link rel="stylesheet" href="//cdn.datatables.net/2.0.3/css/dataTables.dataTables.min.css">

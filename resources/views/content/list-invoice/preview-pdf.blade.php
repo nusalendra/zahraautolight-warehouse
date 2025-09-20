@@ -156,7 +156,7 @@
 <body>
     <div class="header clearfix">
         <div class="logo">
-            <img src="{{ public_path('/assets/img/icons/brands/logo-product.jpeg') }}" alt="Zaira Automotive Lighting Logo" style="max-width: 100%; max-height: 100px;">
+            <img src="{{ public_path('/assets/img/icons/brands/new-logo-fatih.png') }}" alt="Zaira Automotive Lighting Logo" style="max-width: 100%; max-height: 100px;">
         </div>
         <div class="invoice-info">
             <h2>Invoice</h2>
