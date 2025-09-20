@@ -17,11 +17,11 @@
             <div class="app-brand">
               <a href="{{url('/')}}" class="app-brand-link">
                 <span class="app-brand-logo-wrapper">
-                  <img src="/assets/img/icons/brands/logo-product.jpeg" alt="Zahra Auto Light" class="logo-image">
+                  <img src="/assets/img/icons/brands/new-logo-fatih.png" alt="Zahra Auto Light" class="logo-image">
                 </span>
               </a>
             </div>
-            <h2 class="welcome-title">Zahra Auto Light</h2>
+            <h2 class="welcome-title">Fatih Auto Light</h2>
             <p class="welcome-text">Sistem Manajemen Persediaan & Penjualan</p>
             <div class="welcome-decoration">
               <div class="decoration-circle circle-1"></div>

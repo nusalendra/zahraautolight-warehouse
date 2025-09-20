@@ -13,13 +13,13 @@
   <div class="app-brand demo bg-dark-subtle py-3 px-2 mb-2">
     <a href="{{url('/')}}" class="app-brand-link">
       <span class="app-brand-logo demo">
-        <img src="/assets/img/icons/brands/logo-product.jpeg" alt="Logo" class="img-fluid"
+        <img src="/assets/img/icons/brands/new-logo-fatih.png" alt="Logo" class="img-fluid"
           style="max-height: 42px; border-radius: 6px; box-shadow: 0 3px 8px rgba(0,0,0,0.3);">
       </span>
       <div class="ms-2 d-flex flex-column justify-content-center">
         <span class="app-brand-text demo menu-text fw-bolder text-light"
-          style="font-size: 1rem; letter-spacing: 0.5px;">ZAHRA</span>
-        <span class="text-light-emphasis"
+          style="font-size: 1rem; letter-spacing: 0.5px;">FATIH</span>
+        <span class="text-light-emphasis text-warning"
           style="font-size: 0.65rem; margin-top: -5px; letter-spacing: 0.5px; opacity: 0.7;">AUTO LIGHT</span>
       </div>
     </a>
@@ -74,7 +74,7 @@
         class="{{ isset($menu->submenu) ? 'menu-link menu-toggle' : 'menu-link' }} text-light"
         @if (!empty($menu->target)) target="_blank" @endif>
         @isset($menu->icon)
-        <i class="{{ $menu->icon }} text-primary"></i>
+        <i class="{{ $menu->icon }} text-warning"></i>
         @endisset
         <div>{{ $menu->name ?? '' }}</div>
         @isset($menu->badge)
