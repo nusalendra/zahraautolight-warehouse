@@ -32,10 +32,10 @@
     $role = auth()->user()?->role->name ?? 'Guest'; // asumsi user memiliki kolom 'role'
     $menuData = [];
 
-    if ($role === 'Admin') {
+    if ($role === 'Owner') {
+    $menuData = $menuOwnerData[0]->menu ?? [];
+    } elseif ($role === 'Admin') {
     $menuData = $menuAdminData[0]->menu ?? [];
-    } elseif ($role === 'Karyawan') {
-    $menuData = $menuKaryawanData[0]->menu ?? [];
     }
     @endphp
 
