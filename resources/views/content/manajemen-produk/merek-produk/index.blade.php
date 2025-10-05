@@ -34,7 +34,7 @@ $containerNav = 'container-fluid';
                 <h5 class="fw-bold mb-0">Merek</h5>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb m-0 p-0 small">
-                        <li class="breadcrumb-item"><a href="#" class="text-primary">Monitoring Produk</a></li>
+                        <li class="breadcrumb-item"><a href="#" class="text-primary">Manajemen Produk</a></li>
                         <li class="breadcrumb-item active">Merek</li>
                     </ol>
                 </nav>

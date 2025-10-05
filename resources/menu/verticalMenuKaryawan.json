@@ -1,31 +1,10 @@
 {
     "menu": [
         {
-            "name": "Monitoring Produk",
+            "name": "Penjualan",
             "icon": "menu-icon tf-icons bx bxs-package",
-            "slug": "monitoring-produk",
-            "submenu": [
-                {
-                    "url": "monitoring-produk/merek",
-                    "name": "Merek",
-                    "slug": "monitoring-produk.merek"
-                },
-                {
-                    "url": "monitoring-produk/proses-produk-masuk",
-                    "name": "Proses Produk Masuk",
-                    "slug": "monitoring-produk.proses-produk-masuk"
-                },
-                {
-                    "url": "monitoring-produk/tambah-stok-produk",
-                    "name": "Tambah Stok Produk",
-                    "slug": "monitoring-produk.tambah-stok-produk"
-                },
-                {
-                    "url": "monitoring-produk/produk-keluar",
-                    "name": "Produk Keluar",
-                    "slug": "monitoring-produk.produk-keluar"
-                }
-            ]
+            "slug": "penjualan.index",
+            "url": "penjualan"
         },
         {
             "name": "List Invoice",

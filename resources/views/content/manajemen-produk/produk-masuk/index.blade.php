@@ -3,7 +3,7 @@ $container = 'container-fluid';
 $containerNav = 'container-fluid';
 @endphp
 @extends('layouts/contentNavbarLayout')
-@section('title', 'Produk Keluar')
+@section('title', 'Produk Masuk')
 @section('content')
 <style>
     .my-swal-popup {
@@ -29,11 +29,11 @@ $containerNav = 'container-fluid';
                 </span>
             </div>
             <div>
-                <h5 class="fw-bold mb-0">Produk Keluar</h5>
+                <h5 class="fw-bold mb-0">Produk Masuk</h5>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb m-0 p-0 small">
-                        <li class="breadcrumb-item"><a href="#" class="text-primary">Monitoring Produk</a></li>
-                        <li class="breadcrumb-item active">Produk Keluar</li>
+                        <li class="breadcrumb-item"><a href="#" class="text-primary">Manajemen Produk</a></li>
+                        <li class="breadcrumb-item active">Produk Masuk</li>
                     </ol>
                 </nav>
             </div>
@@ -45,38 +45,25 @@ $containerNav = 'container-fluid';
         </div>
     </div>
     <div class="row">
-        <!-- Form Tambah Stok -->
+        <!-- Form Checkout -->
         <div class="col-xxl-8 col-xl-7 col-lg-7">
             <div class="card mb-4">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0">Form Produk Keluar</h5>
+                    <h5 class="mb-0">Form Penambahan Produk</h5>
                 </div>
                 <div class="card-body">
-                    <div class="alert alert-danger font-bold">
-                        <i class="bx bx-info-circle me-1"></i>
-                        Klik tombol "+ Tambah Produk" dulu, lalu tentukan jumlah produk keluar sebelum memilih merek!
-                    </div>
-                    <form id="form-produk-keluar" method="POST">
+                    <form id="form-tambah-produk" method="POST">
                         @csrf
-                        <div class="row">
-                            <div class="col-xxl-6">
-                                <label class="form-label" for="merek_id">Tanggal Invoice</label>
-                                <div class="input-group input-group-merge">
-                                    <span class="input-group-text"><i class="bx bx-calendar"></i></span>
-                                    <input type="date" class="form-control" name="tanggal_invoice" required />
-                                </div>
-                            </div>
-                            <div class="col-xxl-6">
-                                <label class="form-label" for="merek_id">Mitra</label>
-                                <div class="input-group input-group-merge">
-                                    <span class="input-group-text"><i class="bx bx-user"></i></span>
-                                    <select class="form-select" name="mitra_id" required>
-                                        <option value="" selected disabled>Pilih Mitra</option>
-                                        @foreach($listMitra as $mitra)
-                                        <option value="{{$mitra->id}}">{{$mitra->nama}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="merek_id">Merek Produk</label>
+                            <div class="input-group input-group-merge">
+                                <span class="input-group-text"><i class="bx bx-category"></i></span>
+                                <select class="form-select" id="merek_select" name="merek_id" required>
+                                    <option value="" selected disabled>Pilih Merek</option>
+                                    @foreach($listMerek as $merek)
+                                    <option value="{{$merek->id}}">{{$merek->nama}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
 
@@ -92,32 +79,24 @@ $containerNav = 'container-fluid';
                             </div>
                         </div>
 
-                        <div class="mb-3 col-xxl-11">
-                            <label class="form-label" for="merek_id">Merek Produk</label>
-                            <div class="input-group input-group-merge">
-                                <span class="input-group-text"><i class="bx bx-category"></i></span>
-                                <select class="form-select" id="merek_select" name="merek_id" required>
-                                    <option value="" selected disabled>Pilih Merek</option>
-                                    @foreach($listMerek as $merek)
-                                    <option value="{{$merek->id}}">{{$merek->nama}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-
                         <div id="produk-container">
                             <div class="row produk-item mb-4 pb-2 border-bottom">
-                                <div class="col-xxl-5 mb-2">
-                                    <label class="form-label" for="nama_produk">Nama Produk</label>
-                                    <select class="form-select nama_produk_select" name="produk_id[]" required>
-                                        <option value="" selected disabled>Pilih Produk</option>
-                                    </select>
-                                </div>
                                 <div class="col-xxl-4 mb-2">
+                                    <label class="form-label" for="nama_produk">Nama Produk</label>
+                                    <input type="text" class="form-control" id="nama_produk" name="nama_produk[]" placeholder="Masukkan Nama Produk" required />
+                                </div>
+                                <div class="col-xxl-2 mb-2">
                                     <label class="form-label" for="jumlah_0">Jumlah</label>
                                     <div class="input-group input-group-merge">
                                         <span class="input-group-text"></i></span>
                                         <input type="number" class="form-control" id="jumlah_0" name="jumlah[]" min="1" value="1" required />
+                                    </div>
+                                </div>
+                                <div class="col-xxl-3 mb-2">
+                                    <label class="form-label" for="jumlah_0">Harga Satuan</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text">Rp</span>
+                                        <input type="number" class="form-control harga-input" id="harga_0" name="harga[]" min="0" required />
                                     </div>
                                 </div>
                                 <div class="col-xxl-2 d-flex align-items-end mb-2">
@@ -131,7 +110,7 @@ $containerNav = 'container-fluid';
                         <div class="row justify-content-end mt-4">
                             <div class="col-xxl-4 col-12">
                                 <button type="submit" class="btn btn-primary w-100">
-                                    <i class="bx bx-log-out me-1"></i> Keluarkan Produk
+                                    <i class="bx bx-log-in me-1"></i> Simpan Produk
                                 </button>
                             </div>
                         </div>
@@ -145,7 +124,7 @@ $containerNav = 'container-fluid';
             <!-- Ringkasan Pengisian -->
             <div class="card mb-4">
                 <div class="card-header d-flex justify-content-between">
-                    <h5 class="mb-0">Ringkasan Produk Keluar</h5>
+                    <h5 class="mb-0">Ringkasan Produk Masuk</h5>
                 </div>
                 <div class="card-body">
                     <div class="d-flex justify-content-between mb-3">
@@ -168,7 +147,7 @@ $containerNav = 'container-fluid';
                             </span>
                             <div>
                                 <h6 class="mb-0">Total Kuantitas</h6>
-                                <small class="text-muted">Jumlah unit keluar</small>
+                                <small class="text-muted">Jumlah unit masuk</small>
                             </div>
                         </div>
                         <h5 id="total-quantity" class="mb-0 fs-6">0 pcs</h5>
@@ -179,11 +158,11 @@ $containerNav = 'container-fluid';
             <!-- Recent Entry Card -->
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
-                    <h5 class="mb-0">Produk Keluar Hari Ini</h5>
+                    <h5 class="mb-0">Barang Masuk Hari Ini</h5>
                 </div>
                 <div class="card-body" style="max-height: 310px; overflow-y: auto;">
                     <ul class="p-0 m-0">
-                        @forelse($logStokProduk as $logProduk)
+                        @forelse($listProduk as $produk)
                         <li class="d-flex mb-3 pb-2 border-bottom">
                             <div class="avatar flex-shrink-0 me-3">
                                 <span class="avatar-initial rounded bg-label-primary">
@@ -192,21 +171,16 @@ $containerNav = 'container-fluid';
                             </div>
                             <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                                 <div class="me-2">
-                                    <h6 class="mb-0">{{$logProduk->produk->nama}}</h6>
+                                    <h6 class="mb-0">{{$produk->nama}}</h6>
                                     <small class="text-muted">
-                                        {{$logProduk->produk->merek->nama}} •
-                                        dikeluarkan pukul {{ \Carbon\Carbon::parse($logProduk->created_at)->format('H:i') }}
+                                        {{$produk->merek->nama}} •
+                                        produk masuk pukul {{ \Carbon\Carbon::parse($produk->created_at)->format('H:i') }}
                                     </small>
-                                </div>
-                                <div class="user-progress">
-                                    <span class="badge bg-label-dark font-bold">{{$logProduk->stok}} pcs</span>
                                 </div>
                             </div>
                         </li>
                         @empty
-                        <li class="text-center py-3">
-                            <span class="text-muted">Belum ada produk keluar hari ini</span>
-                        </li>
+                        <span class="text-center py-3 text-muted">Belum ada Penjualan hari ini</span>
                         @endforelse
                     </ul>
                 </div>
@@ -218,37 +192,11 @@ $containerNav = 'container-fluid';
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-    $('#form-produk-keluar').on('submit', function(e) {
+    $('#form-tambah-produk').on('submit', function(e) {
         e.preventDefault();
 
-        // Validasi form
-        let isValid = true;
-        $(this).find('[required]').each(function() {
-            if ($(this).val() === '') {
-                isValid = false;
-                $(this).addClass('is-invalid');
-            } else {
-                $(this).removeClass('is-invalid');
-            }
-        });
-
-        if (!isValid) {
-            Swal.fire({
-                icon: 'warning',
-                title: 'Form Tidak Lengkap',
-                text: 'Harap isi semua field yang diperlukan',
-            });
-            return;
-        }
-
-        // Loading state
-        const submitBtn = $(this).find('button[type="submit"]');
-        const originalText = submitBtn.html();
-        submitBtn.html('<i class="bx bx-loader-alt bx-spin me-1"></i> Memproses...');
-        submitBtn.attr('disabled', true);
-
         $.ajax({
-            url: '/api/process-stock-product?type_stock=reduce_stock',
+            url: '/api/add-product',
             method: 'POST',
             data: $(this).serialize(),
             headers: {
@@ -258,28 +206,25 @@ $containerNav = 'container-fluid';
                 Swal.fire({
                     icon: 'success',
                     title: 'Berhasil!',
-                    text: 'Produk berhasil dikeluarkan',
+                    text: 'Produk berhasil disimpan',
                     showConfirmButton: false,
                     timer: 1700
                 }).then(() => {
-                    window.open('/invoice/' + response.invoice_id + '/preview', '_blank');
                     location.reload();
                 });
             },
             error: function(xhr) {
                 const message = xhr.responseJSON?.message || 'Terjadi kesalahan tak diketahui';
+
                 Swal.fire({
                     icon: 'error',
                     title: 'Gagal Menyimpan',
                     text: message,
                 });
-                submitBtn.html(originalText);
-                submitBtn.attr('disabled', false);
             }
         });
     });
 </script>
-
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         let itemCounter = 1;
@@ -288,29 +233,29 @@ $containerNav = 'container-fluid';
         document.getElementById('btn-tambah-barang').addEventListener('click', function() {
             const barangContainer = document.getElementById('produk-container');
             const newItem = document.createElement('div');
-            newItem.className = 'row produk-item mb-4 pb-2 border-bottom';
+            newItem.className = 'row produk-item mb-3';
             newItem.innerHTML = `
-                <div class="col-xxl-5 mb-2">
-                    <label class="form-label" for="nama_produk_${itemCounter}">Nama Produk</label>
-                    <div class="input-group input-group-merge">
-                        <select class="form-select nama_produk_select" id="nama_produk_${itemCounter}" name="produk_id[]" required>
-                            <option value="" selected disabled>Pilih Produk</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-xxl-4 mb-2">
-                    <label class="form-label" for="jumlah_${itemCounter}">Jumlah</label>
-                    <div class="input-group input-group-merge">
-                        <span class="input-group-text"></span>
-                        <input type="number" class="form-control" id="jumlah_${itemCounter}" name="jumlah[]" min="1" value="1" required />
-                    </div>
-                </div>
-                <div class="col-xxl-2 d-flex align-items-end mb-2">
-                    <button type="button" class="btn btn-outline-danger btn-hapus-barang w-100">
-                        <i class="bx bx-trash me-1"></i> Hapus
-                    </button>
-                </div>
-            `;
+      <div class="col-xxl-4 mb-2">
+        <label class="form-label" for="nama_produk_${itemCounter}">Nama Produk</label>
+        <input type="text" class="form-control" id="nama_produk_${itemCounter}" name="nama_produk[]" placeholder="Masukkan Nama Produk" required />
+      </div>
+      <div class="col-xxl-2 mb-2">
+        <label class="form-label" for="jumlah_${itemCounter}">Jumlah</label>
+        <input type="number" class="form-control" id="jumlah_${itemCounter}" name="jumlah[]" min="1" value="1" required />
+      </div>
+      <div class="col-xxl-3 mb-2">
+        <label class="form-label" for="harga_${itemCounter}">Harga Satuan</label>
+        <div class="input-group">
+          <span class="input-group-text">Rp</span>
+          <input type="number" class="form-control harga-input" id="harga_${itemCounter}" name="harga[]" min="0" required />
+        </div>
+      </div>
+      <div class="col-xxl-2 d-flex align-items-end mb-2">
+        <button type="button" class="btn btn-outline-danger mb-0 btn-hapus-barang w-100">
+          <i class="bx bx-trash"></i> Hapus
+        </button>
+      </div>
+    `;
             barangContainer.appendChild(newItem);
             itemCounter++;
             updateSummary();
@@ -351,38 +296,23 @@ $containerNav = 'container-fluid';
             const items = document.querySelectorAll('.produk-item');
             let totalItems = items.length;
             let totalQuantity = 0;
+            let totalNilai = 0;
 
             items.forEach(item => {
                 const jumlah = parseInt(item.querySelector('input[id^="jumlah_"]').value) || 0;
+                const harga = parseInt(item.querySelector('input[id^="harga_"]').value) || 0;
+
                 totalQuantity += jumlah;
+                totalNilai += (jumlah * harga);
             });
 
             document.getElementById('total-items').textContent = totalItems + (totalItems > 1 ? ' items' : ' item');
             document.getElementById('total-quantity').textContent = totalQuantity + ' pcs';
+            document.getElementById('total-nilai').textContent = 'Rp ' + totalNilai.toLocaleString('id-ID');
         }
 
         // Initialize
         updateSummary();
-    });
-
-    document.getElementById('merek_select').addEventListener('change', function() {
-        const merekId = this.value;
-
-        fetch(`/api/get-product-by-merek/${merekId}`)
-            .then(response => response.json())
-            .then(data => {
-                const selectElements = document.querySelectorAll('.nama_produk_select');
-                selectElements.forEach(select => {
-                    select.innerHTML = '<option value="" selected disabled>Pilih Produk</option>';
-                    data.data.forEach(produk => {
-                        const option = document.createElement('option');
-                        option.value = produk.id;
-                        option.text = produk.nama;
-                        select.appendChild(option);
-                    });
-                });
-            })
-            .catch(error => console.error('Error fetching produk:', error));
     });
 </script>
 @endsection

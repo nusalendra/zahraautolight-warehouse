@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\monitoring_produk;
+namespace App\Http\Controllers\manajemen_produk;
 
 use App\Http\Controllers\Controller;
 use App\Http\Services\MerekService;
@@ -26,6 +26,6 @@ class ProdukMasuk extends Controller
         $listMerek = $this->merekService->fetchAll();
         $listProduk = $this->produkService->fetchDataToday();
 
-        return view('content.monitoring-produk.proses-produk-masuk.index', compact('listMerek', 'listProduk'));
+        return view('content.manajemen-produk.produk-masuk.index', compact('listMerek', 'listProduk'));
     }
 }

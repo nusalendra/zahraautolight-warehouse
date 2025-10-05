@@ -18,6 +18,21 @@
       "slug": "manajemen-produk",
       "submenu": [
         {
+          "url": "manajemen-produk/merek",
+          "name": "Merek",
+          "slug": "manajemen-produk.merek"
+        },
+        {
+          "url": "manajemen-produk/produk-masuk",
+          "name": "Produk Masuk",
+          "slug": "manajemen-produk.produk-masuk"
+        },
+        {
+          "url": "manajemen-produk/tambah-stok-produk",
+          "name": "Tambah Stok Produk",
+          "slug": "manajemen-produk.tambah-stok-produk"
+        },
+        {
           "url": "manajemen-produk/list",
           "name": "List Produk",
           "slug": "manajemen-produk.list"
