@@ -21,7 +21,7 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::middleware('role:Admin')->group(function () {
+    Route::middleware('role:Owner')->group(function () {
         Route::get('/dashboard', [Analytics::class, 'index'])->name('dashboard.index');
         Route::get('/mitra', [MitraController::class, 'index'])->name('mitra.index');
         Route::post('/logout', [LoginBasic::class, 'logout']);
@@ -43,7 +43,7 @@ Route::middleware('auth')->group(function () {
         });
     });
 
-    Route::middleware('role:Karyawan')->group(function () {
+    Route::middleware('role:Admin')->group(function () {
         Route::get('/penjualan', [Penjualan::class, 'index'])->name('penjualan.index');
 
         Route::get('/list-invoice', [Invoice::class, 'index'])->name('list-invoice.index');
