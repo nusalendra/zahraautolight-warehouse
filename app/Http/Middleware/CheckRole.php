@@ -16,11 +16,16 @@ class CheckRole
      */
     public function handle(Request $request, Closure $next, ...$roles): Response
     {
-        if (!auth()->check()) {
-            return redirect()->route('auth-login-basic')->with('error', 'Silakan login terlebih dahulu.');
+        if (!Auth::check()) {
+            return redirect()->route('auth-login-basic')
+                ->with('error', 'Silakan login terlebih dahulu.');
         }
 
         $user = Auth::user();
+        
+        if (!in_array($user->role->name, $roles)) {
+            abort(403);
+        }
 
         return $next($request);
     }

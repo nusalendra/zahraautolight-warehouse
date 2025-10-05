@@ -24,7 +24,6 @@ Route::middleware('auth')->group(function () {
     Route::middleware('role:Owner')->group(function () {
         Route::get('/dashboard', [Analytics::class, 'index'])->name('dashboard.index');
         Route::get('/mitra', [MitraController::class, 'index'])->name('mitra.index');
-        Route::post('/logout', [LoginBasic::class, 'logout']);
         Route::prefix('manajemen-produk')->name('manajemen-produk.')->group(function () {
             Route::get('/merek', [Merek::class, 'index'])->name('merek');
             Route::get('/produk-masuk', [ProdukMasuk::class, 'index'])->name('produk-masuk');
@@ -50,4 +49,6 @@ Route::middleware('auth')->group(function () {
         Route::get('/invoice/{id}', [Invoice::class, 'show'])->name('invoice.show');
         Route::get('/invoice/{id}/preview', [Invoice::class, 'previewPdf'])->name('invoice.preview-pdf');
     });
+    
+    Route::post('/logout', [LoginBasic::class, 'logout']);
 });
