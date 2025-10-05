@@ -3,7 +3,7 @@ $container = 'container-fluid';
 $containerNav = 'container-fluid';
 @endphp
 @extends('layouts/contentNavbarLayout')
-@section('title', 'Tambah Stok Produk')
+@section('title', 'Penjualan')
 @section('content')
 <style>
     .my-swal-popup {
@@ -29,11 +29,11 @@ $containerNav = 'container-fluid';
                 </span>
             </div>
             <div>
-                <h5 class="fw-bold mb-0">Tambah Stok Produk</h5>
+                <h5 class="fw-bold mb-0">Penjualan</h5>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb m-0 p-0 small">
-                        <li class="breadcrumb-item"><a href="#" class="text-primary">Monitoring Produk</a></li>
-                        <li class="breadcrumb-item active">Tambah Stok Produk</li>
+                        <li class="breadcrumb-item"><a href="#" class="text-primary">Item</a></li>
+                        <li class="breadcrumb-item active">Penjualan</li>
                     </ol>
                 </nav>
             </div>
@@ -49,25 +49,34 @@ $containerNav = 'container-fluid';
         <div class="col-xxl-8 col-xl-7 col-lg-7">
             <div class="card mb-4">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0">Form Penambahan Stok</h5>
+                    <h5 class="mb-0">Form Penjualan</h5>
                 </div>
                 <div class="card-body">
                     <div class="alert alert-danger font-bold">
                         <i class="bx bx-info-circle me-1"></i>
-                        Klik tombol "+ Tambah Produk" dulu, lalu tentukan jumlah produk sebelum memilih merek!
+                        Klik tombol "+ Tambah Produk Jual" dulu, lalu tentukan jumlah Penjualan sebelum memilih merek!
                     </div>
-                    <form id="form-tambah-produk" method="POST">
+                    <form id="form-produk-keluar" method="POST">
                         @csrf
-                        <div class="mb-3">
-                            <label class="form-label" for="merek_id">Merek Produk</label>
-                            <div class="input-group input-group-merge">
-                                <span class="input-group-text"><i class="bx bx-category"></i></span>
-                                <select class="form-select" id="merek_select" name="merek_id" required>
-                                    <option value="" selected disabled>Pilih Merek</option>
-                                    @foreach($listMerek as $merek)
-                                    <option value="{{$merek->id}}">{{$merek->nama}}</option>
-                                    @endforeach
-                                </select>
+                        <div class="row">
+                            <div class="col-xxl-6">
+                                <label class="form-label" for="merek_id">Tanggal Invoice</label>
+                                <div class="input-group input-group-merge">
+                                    <span class="input-group-text"><i class="bx bx-calendar"></i></span>
+                                    <input type="date" class="form-control" name="tanggal_invoice" required />
+                                </div>
+                            </div>
+                            <div class="col-xxl-6">
+                                <label class="form-label" for="merek_id">Mitra</label>
+                                <div class="input-group input-group-merge">
+                                    <span class="input-group-text"><i class="bx bx-user"></i></span>
+                                    <select class="form-select" name="mitra_id" required>
+                                        <option value="" selected disabled>Pilih Mitra</option>
+                                        @foreach($listMitra as $mitra)
+                                        <option value="{{$mitra->id}}">{{$mitra->nama}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
                         </div>
 
@@ -77,9 +86,22 @@ $containerNav = 'container-fluid';
                             <div class="row mb-2">
                                 <div class="col-12">
                                     <button type="button" id="btn-tambah-barang" class="btn btn-outline-primary">
-                                        <i class="bx bx-plus me-1"></i> Tambah Produk
+                                        <i class="bx bx-plus me-1"></i> Tambah Produk Jual
                                     </button>
                                 </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 col-xxl-11">
+                            <label class="form-label" for="merek_id">Merek Produk</label>
+                            <div class="input-group input-group-merge">
+                                <span class="input-group-text"><i class="bx bx-category"></i></span>
+                                <select class="form-select" id="merek_select" name="merek_id" required>
+                                    <option value="" selected disabled>Pilih Merek</option>
+                                    @foreach($listMerek as $merek)
+                                    <option value="{{$merek->id}}">{{$merek->nama}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
 
@@ -109,7 +131,7 @@ $containerNav = 'container-fluid';
                         <div class="row justify-content-end mt-4">
                             <div class="col-xxl-4 col-12">
                                 <button type="submit" class="btn btn-primary w-100">
-                                    <i class="bx bx-save me-1"></i> Simpan Stok
+                                    <i class="bx bx-log-out me-1"></i> Submit Penjualan
                                 </button>
                             </div>
                         </div>
@@ -123,7 +145,7 @@ $containerNav = 'container-fluid';
             <!-- Ringkasan Pengisian -->
             <div class="card mb-4">
                 <div class="card-header d-flex justify-content-between">
-                    <h5 class="mb-0">Ringkasan Stok Produk</h5>
+                    <h5 class="mb-0">Ringkasan Penjualan</h5>
                 </div>
                 <div class="card-body">
                     <div class="d-flex justify-content-between mb-3">
@@ -146,7 +168,7 @@ $containerNav = 'container-fluid';
                             </span>
                             <div>
                                 <h6 class="mb-0">Total Kuantitas</h6>
-                                <small class="text-muted">Jumlah unit masuk</small>
+                                <small class="text-muted">Jumlah unit keluar</small>
                             </div>
                         </div>
                         <h5 id="total-quantity" class="mb-0 fs-6">0 pcs</h5>
@@ -157,7 +179,7 @@ $containerNav = 'container-fluid';
             <!-- Recent Entry Card -->
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
-                    <h5 class="mb-0">Stok Masuk Hari Ini</h5>
+                    <h5 class="mb-0">Penjualan Hari Ini</h5>
                 </div>
                 <div class="card-body" style="max-height: 310px; overflow-y: auto;">
                     <ul class="p-0 m-0">
@@ -173,7 +195,7 @@ $containerNav = 'container-fluid';
                                     <h6 class="mb-0">{{$logProduk->produk->nama}}</h6>
                                     <small class="text-muted">
                                         {{$logProduk->produk->merek->nama}} •
-                                        ditambahkan pukul {{ \Carbon\Carbon::parse($logProduk->created_at)->format('H:i') }}
+                                        dikeluarkan pukul {{ \Carbon\Carbon::parse($logProduk->created_at)->format('H:i') }}
                                     </small>
                                 </div>
                                 <div class="user-progress">
@@ -182,9 +204,7 @@ $containerNav = 'container-fluid';
                             </div>
                         </li>
                         @empty
-                        <li class="text-center py-3">
-                            <span class="text-muted">Belum ada stok masuk hari ini</span>
-                        </li>
+                        <span class="text-center py-3 text-muted">Belum ada Penjualan hari ini</span>
                         @endforelse
                     </ul>
                 </div>
@@ -196,7 +216,7 @@ $containerNav = 'container-fluid';
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-    $('#form-tambah-produk').on('submit', function(e) {
+    $('#form-produk-keluar').on('submit', function(e) {
         e.preventDefault();
 
         // Validasi form
@@ -222,11 +242,11 @@ $containerNav = 'container-fluid';
         // Loading state
         const submitBtn = $(this).find('button[type="submit"]');
         const originalText = submitBtn.html();
-        submitBtn.html('<i class="bx bx-loader-alt bx-spin me-1"></i> Menyimpan...');
+        submitBtn.html('<i class="bx bx-loader-alt bx-spin me-1"></i> Memproses...');
         submitBtn.attr('disabled', true);
 
         $.ajax({
-            url: '/api/process-stock-product?type_stock=add_stock',
+            url: '/api/process-stock-product?type_stock=reduce_stock',
             method: 'POST',
             data: $(this).serialize(),
             headers: {
@@ -236,10 +256,11 @@ $containerNav = 'container-fluid';
                 Swal.fire({
                     icon: 'success',
                     title: 'Berhasil!',
-                    text: 'Data stok produk berhasil disimpan',
+                    text: 'Produk berhasil dikeluarkan',
                     showConfirmButton: false,
                     timer: 1700
                 }).then(() => {
+                    window.open('/invoice/' + response.invoice_id + '/preview', '_blank');
                     location.reload();
                 });
             },
