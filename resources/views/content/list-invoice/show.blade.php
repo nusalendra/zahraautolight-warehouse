@@ -156,7 +156,7 @@
     <div class="container">
         <div class="header">
             <div class="logo">
-                <img src="/assets/img/icons/brands/new-logo-fatih.png" alt="Zaira Automotive Lighting Logo">
+                <img src="/assets/img/icons/brands/new-logo-fatih.png" alt="Fatih Automotive Lighting Logo">
                 <div class="text-overlay">Z<span>i</span></div>
             </div>
             <div class="invoice-info">
@@ -172,7 +172,7 @@
             <div class="company-info">
                 <h3>Info Perusahaan</h3>
                 <div>
-                    <strong>Zaira Automotive Lighting</strong><br>
+                    <strong>Fatih Automotive Lighting</strong><br>
                     Jalan Raya Petiken No.3 Ruko GWK, Driyorejo, Kab. Gresik,<br>
                     Jawa Timur<br>
                     Telp: 6289685443747<br>

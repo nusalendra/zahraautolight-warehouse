@@ -181,10 +181,8 @@
             color: #000;
         }
 
-        /* Hapus atau ganti style .signature-section img jika tidak digunakan untuk logo di header */
         .signature-section img {
             width: 30;
-            /* Ini harusnya 30px atau 30% jika ingin diukur dengan unit */
             height: auto;
         }
 
@@ -199,11 +197,11 @@
     <div class="receipt-container">
         <div class="header">
             <div class="shop-header">
-                <img src="assets/img/icons/brands/new-logo-fatih.png" alt="Zahra Auto Light" class="logo-image">
+                <img src="assets/img/icons/brands/new-logo-fatih.png" alt="Fatih Auto Light" class="logo-image">
                 <div class="shop-info">
-                    <h1>Zahra Automotive Lighting</h1>
+                    <h1>Fatih Automotive Lighting</h1>
                     <p>Jl. Raya Petiken Ruko No.3, Mulung, Gresik, Jawa Timur</p>
-                    <p>Email: zahraautolight@gmail.com | Telp: +62 812 3456 7890</p>
+                    <p>Email: fatihautolight@gmail.com | Telp: +62 812 3456 7890</p>
                 </div>
             </div>
             <div class="receipt-info">

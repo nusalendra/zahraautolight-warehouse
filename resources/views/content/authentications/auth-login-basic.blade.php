@@ -1,5 +1,5 @@
 @extends('layouts/blankLayout')
-@section('title', 'Zahra Auto Light')
+@section('title', 'Fatih Auto Light')
 @section('page-style')
 @vite([
 'resources/assets/vendor/scss/pages/page-auth.scss'
@@ -17,7 +17,7 @@
             <div class="app-brand">
               <a href="{{url('/')}}" class="app-brand-link">
                 <span class="app-brand-logo-wrapper">
-                  <img src="/assets/img/icons/brands/new-logo-fatih.png" alt="Zahra Auto Light" class="logo-image">
+                  <img src="/assets/img/icons/brands/new-logo-fatih.png" alt="Fatih Auto Light" class="logo-image">
                 </span>
               </a>
             </div>
@@ -65,8 +65,8 @@
             </form>
 
             <div class="system-info">
-              <p class="system-version">Zahra Auto Light Management System v1.0</p>
-              <p class="copyright">© 2025 Zahra Auto Light. All rights reserved.</p>
+              <p class="system-version">Fatih Auto Light Management System v1.0</p>
+              <p class="copyright">© 2025 Fatih Auto Light. All rights reserved.</p>
             </div>
           </div>
         </div>
