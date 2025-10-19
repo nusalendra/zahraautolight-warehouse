@@ -6,7 +6,9 @@ use App\Actions\Invoices;
 use App\Dtos\InvoiceDto;
 use App\Dtos\InvoiceItemDto;
 use App\Dtos\LogStokProductDto;
+use App\Helpers\Discord\SendDiscord;
 use App\Helpers\SendWhatsapp;
+use App\Models\LogActivity;
 use App\Repositories\InvoiceItemRepo;
 use App\Repositories\InvoiceRepo;
 use App\Repositories\LogStokProdukRepo;
@@ -67,7 +69,7 @@ class ProdukService
         }
 
         $logIds = [];
-        $whatsappData = [];
+        $discordData = [];
         $invoiceItems = [];
         $idInvoice = 0;
 
@@ -86,7 +88,7 @@ class ProdukService
                     'harga' => $response['data']['harga'],
                 ];
 
-                $whatsappData[] = $response['data'];
+                $discordData[] = $response['data'];
             }
 
             $produk['harga'] = $response['data']['harga'];
@@ -112,9 +114,14 @@ class ProdukService
                 $this->logStokProdukRepo->updateInvoiceIdById($logId, $idInvoice);
             }
 
-            $whatsapp = new SendWhatsapp();
-            foreach ($whatsappData as $waData) {
-                $send = $whatsapp->handle($waData);
+            $discord = new SendDiscord();
+            foreach ($discordData as $data) {
+                $send = $discord->handle($data);
+                
+                (new LogActivity())->create([
+                    'status' => $send['status'],
+                    'activity' => $send['message']
+                ]);
             }
         }
 
