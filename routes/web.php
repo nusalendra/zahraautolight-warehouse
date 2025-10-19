@@ -7,10 +7,10 @@ use App\Http\Controllers\invoice\Invoice;
 use App\Http\Controllers\manajemen_produk\Laporan;
 use App\Http\Controllers\manajemen_produk\ListProduk;
 use App\Http\Controllers\MitraController;
-use App\Http\Controllers\monitoring_produk\Merek;
-use App\Http\Controllers\monitoring_produk\ProdukKeluar;
-use App\Http\Controllers\monitoring_produk\ProdukMasuk;
-use App\Http\Controllers\monitoring_produk\TambahStokProduk;
+use App\Http\Controllers\manajemen_produk\Merek;
+use App\Http\Controllers\manajemen_produk\ProdukMasuk;
+use App\Http\Controllers\manajemen_produk\TambahStokProduk;
+use App\Http\Controllers\monitoring_produk\Penjualan;
 use App\Http\Controllers\transactions\Transaction;
 use App\Http\Controllers\users\ListUser;
 
@@ -21,11 +21,13 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::middleware('role:Admin')->group(function () {
+    Route::middleware('role:Owner')->group(function () {
         Route::get('/dashboard', [Analytics::class, 'index'])->name('dashboard.index');
         Route::get('/mitra', [MitraController::class, 'index'])->name('mitra.index');
-        Route::post('/logout', [LoginBasic::class, 'logout']);
         Route::prefix('manajemen-produk')->name('manajemen-produk.')->group(function () {
+            Route::get('/merek', [Merek::class, 'index'])->name('merek');
+            Route::get('/produk-masuk', [ProdukMasuk::class, 'index'])->name('produk-masuk');
+            Route::get('/tambah-stok-produk', [TambahStokProduk::class, 'index'])->name('tambah-stok-produk');
             Route::get('/list', [ListProduk::class, 'index'])->name('list');
             Route::get('/laporan', [Laporan::class, 'index'])->name('laporan');
         });
@@ -40,16 +42,13 @@ Route::middleware('auth')->group(function () {
         });
     });
 
-    Route::middleware('role:Karyawan')->group(function () {
-        Route::prefix('monitoring-produk')->name('monitoring-produk.')->group(function () {
-            Route::get('/merek', [Merek::class, 'index'])->name('merek');
-            Route::get('/proses-produk-masuk', [ProdukMasuk::class, 'index'])->name('proses-produk-masuk');
-            Route::get('/tambah-stok-produk', [TambahStokProduk::class, 'index'])->name('tambah-stok-produk');
-            Route::get('/produk-keluar', [ProdukKeluar::class, 'index'])->name('produk-keluar');
-        });
+    Route::middleware('role:Admin')->group(function () {
+        Route::get('/penjualan', [Penjualan::class, 'index'])->name('penjualan.index');
 
         Route::get('/list-invoice', [Invoice::class, 'index'])->name('list-invoice.index');
         Route::get('/invoice/{id}', [Invoice::class, 'show'])->name('invoice.show');
         Route::get('/invoice/{id}/preview', [Invoice::class, 'previewPdf'])->name('invoice.preview-pdf');
     });
+    
+    Route::post('/logout', [LoginBasic::class, 'logout']);
 });

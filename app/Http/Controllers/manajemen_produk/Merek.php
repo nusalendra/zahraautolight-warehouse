@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\monitoring_produk;
+namespace App\Http\Controllers\manajemen_produk;
 
 use App\Http\Controllers\Controller;
 use App\Http\Services\MerekService;
@@ -20,6 +20,6 @@ class Merek extends Controller
     {
         $data = $this->service->fetchAll();
 
-        return view('content.monitoring-produk.merek-produk.index', compact('data'));
+        return view('content.manajemen-produk.merek-produk.index', compact('data'));
     }
 }

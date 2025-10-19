@@ -49,8 +49,8 @@ class User extends Authenticatable
   public function redirectPath()
   {
     return match ($this->role->name) {
-      'Admin' => '/dashboard',
-      'Karyawan' => '/monitoring-produk/proses-produk-masuk',
+      'Owner' => '/dashboard',
+      'Admin' => '/penjualan',
       default => '/',
     };
   }

@@ -18,9 +18,9 @@ $containerNav = 'container-fluid';
             <div class="card-body p-5 bg-white">
                 <div class="row mb-5 pb-4 border-bottom">
                     <div class="col-md-6 mb-4 mb-md-0">
-                        <p class="mb-1 text-dark fw-bold fs-5">CV. Zahra Automotive Lighting</p>
+                        <p class="mb-1 text-dark fw-bold fs-5">CV. Fatih Automotive Lighting</p>
                         <p class="mb-1 text-muted small">Jl. Raya Petiken Ruko No.3, Mulung, GWK, <br>Kec. Driyorejo, Kabupaten Gresik, Jawa Timur 6177</p>
-                        <p class="mb-0 text-muted small">Email: <a href="mailto:zahraautolight@gmail.com" class="text-decoration-none text-muted">zahraautolight@gmail.com</a> | Telp: +62 812 3456 7890</p>
+                        <p class="mb-0 text-muted small">Email: <a href="mailto:fatihautolight@gmail.com" class="text-decoration-none text-muted">fatihautolight@gmail.com</a> | Telp: +62 812 3456 7890</p>
                     </div>
                     <div class="col-md-6 text-md-end">
                         <h6 class="text-dark fw-bold fs-3 mb-2">#{{$invoice->nomor_invoice}}</h6>

@@ -120,13 +120,13 @@
 
         .signature {
             text-align: right;
-            margin-top: 40px;
             float: right;
             width: 30%;
+            font-weight: bold;
+            font-size: 13px;
         }
 
         .signature .name {
-            margin-top: 50px;
             font-weight: bold;
         }
 
@@ -156,7 +156,7 @@
 <body>
     <div class="header clearfix">
         <div class="logo">
-            <img src="{{ public_path('/assets/img/icons/brands/new-logo-fatih.png') }}" alt="Zaira Automotive Lighting Logo" style="max-width: 100%; max-height: 100px;">
+            <img src="{{ public_path('/assets/img/icons/brands/new-logo-fatih.png') }}" alt="Fatih Automotive Lighting Logo" style="max-width: 100%; max-height: 100px;">
         </div>
         <div class="invoice-info">
             <h2>Invoice</h2>
@@ -171,7 +171,7 @@
         <div class="company-info">
             <h3>Info Perusahaan</h3>
             <div>
-                <strong>Zaira Automotive Lighting</strong><br>
+                <strong>Fatih Automotive Lighting</strong><br>
                 Jalan Raya Petiken No.3 Ruko GWK, Driyorejo, Kab. Gresik,<br>
                 Jawa Timur<br>
                 Telp: 6289685443747<br>
@@ -247,8 +247,9 @@
     </div>
 
     <div class="signature">
-        <p>{{ $data->admin_name ?? 'Sumanto (Admin)' }}</p>
+        <p>{{ $data->admin_name ?? 'Fiqi Julian' }}</p>
         <div class="name">
+            <img src="{{ public_path('assets/img/icons/tanda_tangan/tanda_tangan_kwitansi.jpeg') }}" alt="Tanda Tangan" style="width: 30; height: auto; margin-right: 15px;">
             <p>____________________</p>
         </div>
     </div>

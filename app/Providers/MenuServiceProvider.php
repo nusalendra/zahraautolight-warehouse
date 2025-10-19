@@ -22,15 +22,15 @@ class MenuServiceProvider extends ServiceProvider
    */
   public function boot(): void
   {
+    $verticalMenuOwnerJson = file_get_contents(base_path('resources/menu/verticalMenuOwner.json'));
+    $verticalMenuOwnerData = json_decode($verticalMenuOwnerJson);
+
     $verticalMenuAdminJson = file_get_contents(base_path('resources/menu/verticalMenuAdmin.json'));
+
     $verticalMenuAdminData = json_decode($verticalMenuAdminJson);
 
-    $verticalMenuKaryawanJson = file_get_contents(base_path('resources/menu/verticalMenuKaryawan.json'));
-
-    $verticalMenuKaryawanData = json_decode($verticalMenuKaryawanJson);
-
     // Share all menuData to all the views
+    $this->app->make('view')->share('menuOwnerData', [$verticalMenuOwnerData]);
     $this->app->make('view')->share('menuAdminData', [$verticalMenuAdminData]);
-    $this->app->make('view')->share('menuKaryawanData', [$verticalMenuKaryawanData]);
   }
 }

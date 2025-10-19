@@ -1,0 +1,66 @@
+{
+  "menu": [
+    {
+      "name": "Dashboard",
+      "icon": "menu-icon tf-icons bx bx-home-circle",
+      "slug": "dashboard.index",
+      "url": "dashboard"
+    },
+    {
+      "name": "Mitra",
+      "icon": "menu-icon tf-icons bx bx-user-pin",
+      "slug": "mitra.index",
+      "url": "mitra"
+    },
+    {
+      "name": "Manajemen Produk",
+      "icon": "menu-icon tf-icons bx bxs-package",
+      "slug": "manajemen-produk",
+      "submenu": [
+        {
+          "url": "manajemen-produk/merek",
+          "name": "Merek",
+          "slug": "manajemen-produk.merek"
+        },
+        {
+          "url": "manajemen-produk/produk-masuk",
+          "name": "Produk Masuk",
+          "slug": "manajemen-produk.produk-masuk"
+        },
+        {
+          "url": "manajemen-produk/tambah-stok-produk",
+          "name": "Tambah Stok Produk",
+          "slug": "manajemen-produk.tambah-stok-produk"
+        },
+        {
+          "url": "manajemen-produk/list",
+          "name": "List Produk",
+          "slug": "manajemen-produk.list"
+        },
+        {
+          "url": "manajemen-produk/laporan",
+          "name": "Laporan",
+          "slug": "manajemen-produk.laporan"
+        }
+      ]
+    },
+    {
+      "name": "Invoice",
+      "icon": "menu-icon tf-icons bx bx-list-plus",
+      "slug": "invoice.index",
+      "url": "invoice"
+    },
+    {
+      "name": "Users",
+      "icon": "menu-icon tf-icons bx bx-user",
+      "slug": "users",
+      "submenu": [
+        {
+          "url": "users/list",
+          "name": "List",
+          "slug": "users.list"
+        }
+      ]
+    }
+  ]
+}
